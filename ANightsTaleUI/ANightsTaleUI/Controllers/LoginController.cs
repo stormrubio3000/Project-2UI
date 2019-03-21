@@ -12,7 +12,7 @@ namespace ANightsTaleUI.Controllers
 {
     public class LoginController : Controller
     {
-        static string url = "https://localhost:44322/";
+        static string url = "https://localhost:44369/api/Users";
 
         public ActionResult Index()
         {
