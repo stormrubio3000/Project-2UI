@@ -1,0 +1,106 @@
+﻿@model ANightsTaleUI.Models.Users
+
+@{
+    ViewData["Title"] = "SignUp";
+    Layout = "~/Views/Shared/_Login.cshtml";
+}
+
+@{
+    List<SelectListItem> listPermission = new List<SelectListItem>();
+    listPermission.Add(new SelectListItem
+    {
+        Text = "Game Master",
+        Value = "0"
+    });
+    listPermission.Add(new SelectListItem
+    {
+        Text = "Player",
+        Value = "1",
+    });
+}
+
+<header>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=IM+Fell+DW+Pica+SC" />
+</header>
+<style>
+body { background-image: url("http://alena-vysotskaya.ru/images/600/DSC100616442.jpg"); background-repeat: no-repeat }
+
+    h1 {
+        font-family: "IM Fell DW Pica SC";
+        color: gold;
+        font-size: 50px;
+    }
+
+    h4 {
+        font-family: "IM Fell DW Pica SC";
+        color: gold;
+        font-size: 25px;
+    }
+    .form-group {
+        font-family: "IM Fell DW Pica SC";
+        color: darkgoldenrod;
+        font-weight: bold;
+    }
+
+    .back {
+        font-family: "IM Fell DW Pica SC";
+        color: goldenrod;
+        font-weight: bold;
+    }
+    .col-md-4 {
+        float: none;
+        margin: 0 auto;
+        background-color: lightgray;
+        border-style: double;
+        border-color: goldenrod
+    }
+    .btn-btn-primary {
+        background-color: forestgreen;
+    }
+</style>
+
+<h1>A Nights Tale</h1>
+
+<h4>Sign Up</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SignUp">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="control-label"></label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @Html.DropDownListFor(model => model.Permission, listPermission, "-- Select Roll --")
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn-btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="back">Back to Login</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
