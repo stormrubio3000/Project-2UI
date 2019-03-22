@@ -1,18 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using ANightsTaleUI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
 namespace ANightsTaleUI.Controllers
 {
-    public class LoginController : Controller
+    public class LoginController : AServiceController
     {
-        static string url = "https://localhost:44369/api/Users";
+        public LoginController(HttpClient httpClient, IConfiguration configuration)
+                : base(httpClient, configuration)
+        {
+        }
 
         public ActionResult Index()
         {
@@ -28,40 +33,38 @@ namespace ANightsTaleUI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SignUpAsync(Users user)
         {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    using (var httpClient = new HttpClient())
-                    {
-                        await AddUserAsync(url, httpClient, user);
-                    }
 
-                    RedirectToAction(nameof(Index));
-                }
+            if (!ModelState.IsValid)
+            {
                 return View(user);
             }
-            catch
+
+                HttpRequestMessage request = CreateRequestToService(HttpMethod.Post,
+                    Configuration["ServiceEndpoints:Users"], user);
+
+                HttpResponseMessage response;
+
+            try
             {
-                return View();
+                response = await HttpClient.SendAsync(request);
             }
-        }
+            catch (HttpRequestException)
+            {
+                ModelState.AddModelError("", "Unexpected server error");
+                return View(user);
+            }
 
-        static async Task AddUserAsync(string url, HttpClient httpClient, Users user)
-        {
-            var newUser = new Users {
-                Username = user.Username,
-                Password = user.Password,
-                Email = user.Email,
-                Permission = user.Permission
-            };
+            if (!response.IsSuccessStatusCode)
+            {
+                if (response.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+                ModelState.AddModelError("", "Unexpected server error");
+                return View(user);
+            }
 
-            var json = JsonConvert.SerializeObject(newUser);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            HttpResponseMessage response = await httpClient.PostAsync(url, content);
-            // throw an exception if status code indicates failure
-            response.EnsureSuccessStatusCode();
+            return RedirectToAction(nameof(Index));
         }
     }
 }
