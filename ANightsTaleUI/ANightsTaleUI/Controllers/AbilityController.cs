@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ANightsTaleUI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,7 +14,9 @@ namespace ANightsTaleUI.Controllers
 		// GET: Ability
 		public ActionResult Index()
         {
-            return View();
+			var models = new List<Abilities>();
+			//ToDo: Talk to the API
+            return View(models);
         }
 
         // GET: Ability/Details/5

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ANightsTaleUI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,7 +15,9 @@ namespace ANightsTaleUI.Controllers
 		// GET: Campaign
 		public ActionResult Index()
         {
-            return View();
+			var models = new List<Campaign>();
+			//ToDo: talk to the repo
+            return View(models);
         }
 
         // GET: Campaign/Details/5
