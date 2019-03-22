@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using ANightsTaleUI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace ANightsTaleUI.Controllers
 {
@@ -13,18 +15,41 @@ namespace ANightsTaleUI.Controllers
 
 		static string url = "https://localhost:44369/api/Campaign";
 		// GET: Campaign
-		public ActionResult Index()
+		public async Task<ActionResult> Index()
         {
 			var models = new List<Campaign>();
-			//ToDo: talk to the repo
-            return View(models);
-        }
+			using (var httpClient = new HttpClient())
+			{
+				var Response = await httpClient.GetAsync(url);
+				if (Response.IsSuccessStatusCode)
+				{
+					var jsonString = await Response.Content.ReadAsStringAsync();
+					List<Campaign> campaign = JsonConvert.DeserializeObject<List<Campaign>>(jsonString);
+					return View(campaign);
+				}
+			}
+
+			return View(models);
+		}
 
         // GET: Campaign/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            return View();
-        }
+			var model = new Campaign();
+			using (var httpClient = new HttpClient())
+			{
+
+				var Response = await httpClient.GetAsync(url + id.ToString());
+				if (Response.IsSuccessStatusCode)
+				{
+					var jsonString = await Response.Content.ReadAsStringAsync();
+					Campaign campaign = JsonConvert.DeserializeObject<Campaign>(jsonString);
+					return View(campaign);
+				}
+			}
+
+			return View(model);
+		}
 
         // GET: Campaign/Create
         public ActionResult Create()

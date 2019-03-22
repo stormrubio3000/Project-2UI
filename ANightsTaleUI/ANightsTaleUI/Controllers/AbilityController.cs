@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using ANightsTaleUI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace ANightsTaleUI.Controllers
 {
@@ -12,18 +14,41 @@ namespace ANightsTaleUI.Controllers
     {
 		static string url = "https://localhost:44369/api/Ability";
 		// GET: Ability
-		public ActionResult Index()
+		public async Task<ActionResult> Index()
         {
 			var models = new List<Abilities>();
-			//ToDo: Talk to the API
-            return View(models);
-        }
+			using (var httpClient = new HttpClient())
+			{
+				var Response = await httpClient.GetAsync(url);
+				if (Response.IsSuccessStatusCode)
+				{
+					var jsonString = await Response.Content.ReadAsStringAsync();
+					List<Abilities> abilities = JsonConvert.DeserializeObject<List<Abilities>>(jsonString);
+					return View(abilities);
+				}
+			}
+
+			return View(models);
+		}
 
         // GET: Ability/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            return View();
-        }
+			var model = new Abilities();
+			using (var httpClient = new HttpClient())
+			{
+
+				var Response = await httpClient.GetAsync(url + id.ToString());
+				if (Response.IsSuccessStatusCode)
+				{
+					var jsonString = await Response.Content.ReadAsStringAsync();
+					Abilities abilities = JsonConvert.DeserializeObject<Abilities>(jsonString);
+					return View(abilities);
+				}
+			}
+
+			return View(model);
+		}
 
         // GET: Ability/Create
         public ActionResult Create()

@@ -1,29 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using ANightsTaleUI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace ANightsTaleUI.Controllers
 {
     public class FeatsController : Controller
     {
-		static string url = "https://localhost:44369/api/Feats";
+		static string url = "https://localhost:44369/api/Feat";
 		// GET: Feats
-		public ActionResult Index()
+		public async Task<ActionResult> Index()
         {
 			var models = new List<Feats>();
-			//ToDo: talk to the API
-            return View(models);
-        }
+			using (var httpClient = new HttpClient())
+			{
+				var Response = await httpClient.GetAsync(url);
+				if (Response.IsSuccessStatusCode)
+				{
+					var jsonString = await Response.Content.ReadAsStringAsync();
+					List<Feats> feats = JsonConvert.DeserializeObject<List<Feats>>(jsonString);
+					return View(feats);
+				}
+			}
+
+			return View(models);
+		}
 
         // GET: Feats/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            return View();
-        }
+			var model = new Feats();
+			using (var httpClient = new HttpClient())
+			{
+
+				var Response = await httpClient.GetAsync(url + id.ToString());
+				if (Response.IsSuccessStatusCode)
+				{
+					var jsonString = await Response.Content.ReadAsStringAsync();
+					Feats feats = JsonConvert.DeserializeObject<Feats>(jsonString);
+					return View(feats);
+				}
+			}
+
+			return View(model);
+		}
 
         // GET: Feats/Create
         public ActionResult Create()

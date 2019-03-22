@@ -18,8 +18,6 @@ namespace ANightsTaleUI.Controllers
 		public async Task<ActionResult> Index()
         {
 			var models = new List<Item>();
-
-
 			using (var httpClient = new HttpClient())
 			{
 				var Response = await httpClient.GetAsync(url);
