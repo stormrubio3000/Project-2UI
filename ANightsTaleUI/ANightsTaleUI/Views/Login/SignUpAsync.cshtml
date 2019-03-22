@@ -88,7 +88,7 @@ body { background-image: url("http://alena-vysotskaya.ru/images/600/DSC100616442
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                @Html.DropDownListFor(model => model.Permission, listPermission, "-- Select Roll --")
+                @Html.DropDownListFor(model => model.Permission, listPermission, "-- Select Role --")
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn-btn-primary" />
