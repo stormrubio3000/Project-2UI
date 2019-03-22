@@ -18,7 +18,6 @@ namespace ANightsTaleUI.Controllers
 		public async Task<ActionResult> Index()
         {
 			var models = new List<Item>();
-			//ToDo: add in the talking to the API to get the list of everything.
 
 
 			using (var httpClient = new HttpClient())
@@ -36,9 +35,23 @@ namespace ANightsTaleUI.Controllers
         }
 
         // GET: Item/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            return View();
+
+			var model = new Item();
+			using (var httpClient = new HttpClient())
+			{
+
+				var Response = await httpClient.GetAsync(url+id.ToString());
+				if (Response.IsSuccessStatusCode)
+				{
+					var jsonString = await Response.Content.ReadAsStringAsync();
+					Item item = JsonConvert.DeserializeObject<Item>(jsonString);
+					return View(item);
+				}
+			}
+
+			return View(model);
         }
 
         // GET: Item/Create
