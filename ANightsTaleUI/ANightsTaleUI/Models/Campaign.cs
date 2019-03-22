@@ -8,6 +8,8 @@ namespace ANightsTaleUI.Models
 {
 	public class Campaign
 	{
+		public int CampaignID { get; set; }
+
 		[Required]
 		[Display(Name = "Campaign Name")]
 		public string Name { get; set; }

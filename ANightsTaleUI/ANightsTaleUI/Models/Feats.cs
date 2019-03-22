@@ -8,6 +8,8 @@ namespace ANightsTaleUI.Models
 {
 	public class Feats
 	{
+		public int FeatID { get; set; }
+
 		[Required]
 		public string Name { get; set; }
 

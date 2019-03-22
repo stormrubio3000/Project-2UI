@@ -9,6 +9,8 @@ namespace ANightsTaleUI.Models
 	public class Item
 	{
 
+		public int ItemID { get; set; }
+
 		[Required]
 		public string Name { get; set; }
 

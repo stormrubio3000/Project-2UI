@@ -38,7 +38,7 @@ namespace ANightsTaleUI.Controllers
 			using (var httpClient = new HttpClient())
 			{
 
-				var Response = await httpClient.GetAsync(url + id.ToString());
+				var Response = await httpClient.GetAsync(url +"/" + (id).ToString());
 				if (Response.IsSuccessStatusCode)
 				{
 					var jsonString = await Response.Content.ReadAsStringAsync();
