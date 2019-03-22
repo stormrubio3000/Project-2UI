@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using ANightsTaleUI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace ANightsTaleUI.Controllers
 {
@@ -13,11 +15,24 @@ namespace ANightsTaleUI.Controllers
 
 		static string url = "https://localhost:44369/api/Item";
 		// GET: Item
-		public ActionResult Index()
+		public async Task<ActionResult> Index()
         {
 			var models = new List<Item>();
 			//ToDo: add in the talking to the API to get the list of everything.
-            return View(models);
+
+
+			using (var httpClient = new HttpClient())
+			{
+				var Response = await httpClient.GetAsync(url);
+				if(Response.IsSuccessStatusCode)
+				{
+					var jsonString = await Response.Content.ReadAsStringAsync();
+					List<Item> items = JsonConvert.DeserializeObject<List<Item>>(jsonString);
+					return View(items);
+				}
+			}
+
+			return View(models);
         }
 
         // GET: Item/Details/5
