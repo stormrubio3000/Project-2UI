@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using ANightsTaleUI.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -34,8 +35,15 @@ namespace ANightsTaleUI
 
             services.AddSingleton<HttpClient>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-		}
+            services.AddScoped<GetAccountDetailsFilter>();
+
+            // adding filters globally
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(GetAccountDetailsFilter));
+            })
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+        }
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)

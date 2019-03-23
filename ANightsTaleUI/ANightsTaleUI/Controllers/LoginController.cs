@@ -74,6 +74,38 @@ namespace ANightsTaleUI.Controllers
             return RedirectToAction("Index", "Campaign");
         }
 
+        // POST: /Account/Logout
+        [HttpPost]
+        public async Task<ActionResult> Logout()
+        {
+            HttpRequestMessage request = CreateRequestToService(HttpMethod.Post,
+                Configuration["ServiceEndpoints:AccountLogout"]);
+
+            HttpResponseMessage response;
+            try
+            {
+                response = await HttpClient.SendAsync(request);
+            }
+            catch (HttpRequestException)
+            {
+                return View("Error", new ErrorViewModel());
+            }
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return View("Error", new ErrorViewModel());
+            }
+
+            var success = PassCookiesToClient(response);
+            if (!success)
+            {
+                return View("Error", new ErrorViewModel());
+            }
+
+            // logout success
+            return RedirectToAction("Index", "Login");
+        }
+
         public ActionResult SignUpAsync()
         {
             return View();
@@ -128,6 +160,35 @@ namespace ANightsTaleUI.Controllers
                 return true;
             }
             return false;
+        }
+
+        // GET: Character/Details/5
+        public async Task<ActionResult> Details(int id)
+        {
+            HttpRequestMessage request = CreateRequestToService(HttpMethod.Get,
+                $"{Configuration["ServiceEndpoints:Users"]}/{id}");
+
+            HttpResponseMessage response;
+            try
+            {
+                response = await HttpClient.SendAsync(request);
+            }
+            catch (HttpRequestException)
+            {
+                return View("Error", new ErrorViewModel());
+            }
+            if (!response.IsSuccessStatusCode)
+            {
+                if (response.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+                return View("Error", new ErrorViewModel());
+            }
+            var jsonString = await response.Content.ReadAsStringAsync();
+            Login user = JsonConvert.DeserializeObject<Login>(jsonString);
+
+            return View(user);
         }
     }
 }

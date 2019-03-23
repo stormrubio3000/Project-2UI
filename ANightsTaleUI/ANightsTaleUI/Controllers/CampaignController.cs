@@ -1,19 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using ANightsTaleUI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
 namespace ANightsTaleUI.Controllers
 {
-    public class CampaignController : Controller
+    public class CampaignController : AServiceController
     {
+        public CampaignController(HttpClient httpClient, IConfiguration configuration)
+    : base(httpClient, configuration)
+        {
+        }
 
-		static string url = "https://localhost:44369/api/Campaign";
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        static string url = "https://localhost:44369/api/Campaign";
 		// GET: Campaign
 		public async Task<ActionResult> Index()
         {

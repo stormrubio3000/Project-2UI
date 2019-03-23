@@ -1,9 +1,35 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var account = ViewData["accountDetails"] as ANightsTaleUI.Models.AccountDetails;
+}
+
+<header>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=IM+Fell+DW+Pica+SC" />
+</header>
+
+<style>
+
+    .nav-link-text-dark {
+        color: silver;
+        font-family: "IM Fell DW Pica SC";
+        padding-left : 50px;
+        font-size : 20px;
+    }
+
+    .navbar-bran {
+        font-family: "IM Fell DW Pica SC";
+        color: goldenrod;
+        font-weight : bold;
+        font-size : 30px
+            
+    }
+    
+</style>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ANightsTaleUI</title>
+    <title>@ViewData["Title"] - A NightsTale Tale</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -13,37 +39,46 @@
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
               crossorigin="anonymous"
-              integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE="/>
+              integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" />
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <header class="head-nav">
+
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ANightsTaleUI</a>
+                <a class="navbar-bran" asp-area="" asp-controller="Home" asp-action="Index">A Nights Tale</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <form class="form-inline" asp-controller="Login" asp-action="Logout">
+                        <span class="navbar-text mr-sm-2">
+                            @account.Username
+                        </span>
+                        <button class="btn btn-outline-info" type="submit">Log out</button>
+                    </form>
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Campaign" asp-action="Index">Campaign Menu</a>
+                            <a class="nav-link-text-dark" asp-area="" asp-controller="Campaign" asp-action="Index">Campaign Menu</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Character" asp-action="Index">Character List List</a>
+                            <a class="nav-link-text-dark" asp-area="" asp-controller="Character" asp-action="Index">Characters</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Item" asp-action="Index">Item List</a>
+                            <a class="nav-link-text-dark" asp-area="" asp-controller="Item" asp-action="Index">Items</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Ability" asp-action="Index">Ability List</a>
+                            <a class="nav-link-text-dark" asp-area="" asp-controller="Ability" asp-action="Index">Abilities</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Feats" asp-action="Index">Feat List</a>
+                        <li class="nav-item" >
+                            <a class="nav-link-text-dark" asp-area="" asp-controller="Feats" asp-action="Index">Feats</a>
+ 
                         </li>
                     </ul>
+
                 </div>
             </div>
         </nav>
@@ -57,7 +92,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2019 - ANightsTaleUI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2019 - A Nights Tale - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
 

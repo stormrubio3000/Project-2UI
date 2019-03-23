@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using ANightsTaleUI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -17,7 +18,7 @@ namespace ANightsTaleUI.Controllers
         public IConfiguration Configuration { get; }
         public Uri ServiceUrl { get; }
 
-        //public ApiAccountDetails Account { get; set; }
+        public AccountDetails Account { get; set; }
 
         protected AServiceController(HttpClient httpClient, IConfiguration configuration)
         {

@@ -55,7 +55,8 @@ html {
 }
 
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
-  display: block;
+    display: block;
+    background-color : cadetblue
 }
 
 body {
@@ -548,11 +549,12 @@ pre code {
 }
 
 .container {
-  width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: darkslategrey
 }
 
 @media (min-width: 576px) {
@@ -3960,16 +3962,17 @@ input[type="button"].btn-block {
 }
 
 .navbar {
-  position: relative;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  -ms-flex-align: center;
-  align-items: center;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  padding: 0.5rem 1rem;
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    background-color: darkslategrey
 }
 
 .navbar > .container,
@@ -3992,6 +3995,7 @@ input[type="button"].btn-block {
   font-size: 1.25rem;
   line-height: inherit;
   white-space: nowrap;
+  background-color: darkslategrey
 }
 
 .navbar-brand:hover, .navbar-brand:focus {
@@ -8993,9 +8997,10 @@ a.text-dark:hover, a.text-dark:focus {
   body {
     min-width: 992px !important;
   }
-  .container {
-    min-width: 992px !important;
-  }
+    .container {
+        min-width: 992px !important;
+        background-color: darkslategrey
+    }
   .navbar {
     display: none;
   }
