@@ -4,72 +4,116 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<header>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=IM+Fell+DW+Pica+SC" />
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+</header>
+
+<style>
+    body {
+        background-image: url("https://images.alphacoders.com/229/229741.png");
+        background-repeat: repeat
+    }
+
+    h2 {
+        font-family: "IM Fell DW Pica SC";
+        color: gold;
+    }
+
+    .table {
+        float: none;
+        margin: 0 auto;
+        background-color: lightgray;
+        border-style: double;
+        border-color: goldenrod
+    }
+
+    .data-name, .tag-name {
+        font-family: "IM Fell DW Pica SC";
+    }
+
+    .item {
+        width: 37px;
+        padding-right: 12px
+    }
+
+    .btn-create {
+        background-color: forestgreen;
+        font-family: "IM Fell DW Pica SC";
+        margin-bottom: 10px
+    }
+</style>
+
+<h2>Items</h2>
+
+<button asp-action="Create" class="btn-create">Create New</button>
+
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.Description)
             </th>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.Type)
             </th>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.AC)
             </th>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.NumDice)
             </th>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.NumSides)
             </th>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.Mods)
             </th>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.Effects)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AC)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumDice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumSides)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mods)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Effects)
-            </td>
-            <td>
-                @Html.ActionLink("Details", "Details", new {  id=item.ItemID }) |
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="data-name">
+                    <div>
+                        <img src="https://cdn3.iconfinder.com/data/icons/basic-mobile-part-2/512/protection-512.png" class="item">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </div>
+                </td>
+                <td class="data-name">
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td class="data-name">
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td class="data-name">
+                    @Html.DisplayFor(modelItem => item.AC)
+                </td>
+                <td class="data-name">
+                    @Html.DisplayFor(modelItem => item.NumDice)
+                </td>
+                <td class="data-name">
+                    @Html.DisplayFor(modelItem => item.NumSides)
+                </td>
+                <td class="data-name">
+                    @Html.DisplayFor(modelItem => item.Mods)
+                </td>
+                <td class="data-name">
+                    @Html.DisplayFor(modelItem => item.Effects)
+                </td>
+                <td class="data-name">
+                    @Html.ActionLink("Details", "Details", new { id = item.ItemID }) |
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+

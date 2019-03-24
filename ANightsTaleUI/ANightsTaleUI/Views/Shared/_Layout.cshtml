@@ -19,8 +19,12 @@
         font-family: "IM Fell DW Pica SC";
         color: goldenrod;
         font-weight : bold;
-        font-size : 30px
-            
+        font-size : 30px         
+    }
+    .navbar-text-mr-sm-2 {
+        font-family: "IM Fell DW Pica SC";
+        color: goldenrod;
+        padding-right : 10px
     }
     
 </style>
@@ -55,7 +59,7 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <form class="form-inline" asp-controller="Login" asp-action="Logout">
-                        <span class="navbar-text mr-sm-2">
+                        <span class="navbar-text-mr-sm-2">
                             @account.Username
                         </span>
                         <button class="btn btn-outline-info" type="submit">Log out</button>

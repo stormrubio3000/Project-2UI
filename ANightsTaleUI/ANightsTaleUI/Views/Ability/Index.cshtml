@@ -4,54 +4,95 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<header>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=IM+Fell+DW+Pica+SC" />
+
+</header>
+
+<style>
+body { background-image: url("https://cdna.artstation.com/p/assets/images/images/001/148/634/large/jordan-grimmer-lunchspeedy72-4-5t23-copy.jpg?1441066351"); background-repeat: no-repeat }
+
+    h2 {
+        font-family: "IM Fell DW Pica SC";
+        color: gold;
+    }
+
+    .table {
+        float: none;
+        margin: 0 auto;
+        background-color: lightgray;
+        border-style: double;
+        border-color: goldenrod
+    }
+
+    .data-name, .tag-name {
+        font-family: "IM Fell DW Pica SC";
+    }
+
+    .ability {
+        width: 37px;
+        padding-right: 12px
+    }
+
+    .btn-create {
+        background-color: forestgreen;
+        font-family: "IM Fell DW Pica SC";
+        margin-bottom: 10px
+    }
+</style>
+
+<h2>Abilities</h2>
+
+<button asp-action="Create" class="btn-create">Create New</button>
+
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.Description)
             </th>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.NumDice)
             </th>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.NumSides)
             </th>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.Attack)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumDice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumSides)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Attack)
-            </td>
-            <td>
-                @Html.ActionLink("Details", "Details", new {  id=item.AbilityID })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="data-name">
+                    <div>
+                        <img src="http://cdn.onlinewebfonts.com/svg/img_411465.png" class="ability">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </div>           
+                </td>
+                <td class="data-name">
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td class="data-name">
+                    @Html.DisplayFor(modelItem => item.NumDice)
+                </td>
+                <td class="data-name">
+                    @Html.DisplayFor(modelItem => item.NumSides)
+                </td>
+                <td class="data-name">
+                    @Html.DisplayFor(modelItem => item.Attack)
+                </td>
+                <td class="data-name">
+                    @Html.ActionLink("Details", "Details", new { id = item.AbilityID })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

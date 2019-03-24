@@ -1,21 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using ANightsTaleUI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using PagedList;
 
 namespace ANightsTaleUI.Controllers
 {
-    public class ItemController : Controller
+    public class ItemController : AServiceController
     {
+        public ItemController(HttpClient httpClient, IConfiguration configuration)
+: base(httpClient, configuration)
+        {
+        }
 
-		static string url = "https://localhost:44369/api/Item";
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        static string url = "https://localhost:44369/api/Item";
 		// GET: Item
-		public async Task<ActionResult> Index()
+		public async Task<ActionResult> Index(int? page)
         {
 			var models = new List<Item>();
 			using (var httpClient = new HttpClient())
@@ -29,7 +42,11 @@ namespace ANightsTaleUI.Controllers
 				}
 			}
 
-			return View(models);
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+           //return View(models.ToPagedList(pageNumber, pageSize));
+
+            return View(models);
         }
 
         // GET: Item/Details/5
