@@ -72,12 +72,15 @@ namespace ANightsTaleUI.Controllers
         // POST: Ability/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Abilities collection)
         {
-            try
-            {
-                // TODO: Add insert logic here
-
+			try
+			{
+				using (var httpClient = new HttpClient())
+				{
+					var request = CreateRequestToService(HttpMethod.Post, url, collection);
+					var Response = httpClient.SendAsync(request);
+				}
                 return RedirectToAction(nameof(Index));
             }
             catch
