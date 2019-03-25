@@ -72,13 +72,17 @@ namespace ANightsTaleUI.Controllers
         // POST: Campaign/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(Campaign collection)
         {
             try
             {
-                // TODO: Add insert logic here
+				using (var httpClient = new HttpClient())
+				{
+					var request = CreateRequestToService(HttpMethod.Post, url, collection);
+					var Response = await httpClient.SendAsync(request);
+				}
 
-                return RedirectToAction(nameof(Index));
+				return RedirectToAction(nameof(Index));
             }
             catch
             {

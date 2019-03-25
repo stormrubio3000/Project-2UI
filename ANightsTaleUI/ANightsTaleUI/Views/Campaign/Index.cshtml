@@ -49,7 +49,9 @@
 </style>
 <h2>Choose a Campaign</h2>
 
-<button asp-action="Create" class="btn-create">Create New</button>
+<form method="get">
+    <button asp-controller="Campaign" asp-action="Create" class="btn-create">Create New</button>
+</form>
 
 <table class="table">
     <thead>
