@@ -4,6 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
+@{
+    var account = ViewData["accountDetails"] as ANightsTaleUI.Models.AccountDetails;
+}
+
 
 <header>
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=IM+Fell+DW+Pica+SC" />
@@ -11,7 +15,10 @@
 </header>
 
 <style>
-body { background-image: url("https://cdna.artstation.com/p/assets/images/images/001/148/634/large/jordan-grimmer-lunchspeedy72-4-5t23-copy.jpg?1441066351"); background-repeat: no-repeat }
+    body {
+        background-image: url("https://cdna.artstation.com/p/assets/images/images/001/148/634/large/jordan-grimmer-lunchspeedy72-4-5t23-copy.jpg?1441066351");
+        background-repeat: no-repeat
+    }
 
     h2 {
         font-family: "IM Fell DW Pica SC";
@@ -44,8 +51,10 @@ body { background-image: url("https://cdna.artstation.com/p/assets/images/images
 
 <h2>Abilities</h2>
 
-<button asp-action="Create" class="btn-create">Create New</button>
-
+@if (account?.Roles?.Contains("admin") ?? false)
+{
+    <button asp-action="Create" class="btn-create">Create New</button>
+}
 <table class="table">
     <thead>
         <tr>
@@ -75,7 +84,7 @@ body { background-image: url("https://cdna.artstation.com/p/assets/images/images
                     <div>
                         <img src="http://cdn.onlinewebfonts.com/svg/img_411465.png" class="ability">
                         @Html.DisplayFor(modelItem => item.Name)
-                    </div>           
+                    </div>
                 </td>
                 <td class="data-name">
                     @Html.DisplayFor(modelItem => item.Description)

@@ -1,11 +1,7 @@
 ﻿@model IEnumerable<ANightsTaleUI.Models.Campaign>
 
 @{
-    ViewData["Title"] = "Index";
-}
-
-@{ 
-    var account = ViewData["accountDetails"] as AccountDetails;
+    ViewData["Title"] = "CampaignList";
 }
 
 <header>
@@ -44,10 +40,10 @@
     .btn-create {
         background-color: forestgreen;
         font-family: "IM Fell DW Pica SC";
-        margin-bottom : 10px
+        margin-bottom: 10px
     }
 </style>
-<h2>Choose a Campaign</h2>
+<h2>Campaigns</h2>
 
 <button asp-action="Create" class="btn-create">Create New</button>
 
@@ -68,7 +64,7 @@
                 <td class="data-name">
                     <div>
                         <img src="https://www.freeiconspng.com/uploads/scroll-icon-11.png" class="scroll">
-                        @Html.ActionLink(item.Name, "CharCampUsr","Character", new { id = item.CampaignID , username = account.Username })
+                        @Html.ActionLink(item.Name, "CharCampUsr", new { id = item.CampaignID })
                     </div>
 
                 </td>

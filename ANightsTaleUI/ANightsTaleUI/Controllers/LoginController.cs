@@ -146,7 +146,7 @@ namespace ANightsTaleUI.Controllers
                 return View(user);
             }
 
-            return RedirectToAction(nameof(Login));
+            return RedirectToAction("Index", "Campaign");
         }
 
         private bool PassCookiesToClient(HttpResponseMessage apiResponse)

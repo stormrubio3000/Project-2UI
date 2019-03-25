@@ -19,6 +19,7 @@ namespace ANightsTaleUI.Models
 
         [Required]
         [Display(Name = "Password Confirmation")]
+        [Compare("Password")]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
 
