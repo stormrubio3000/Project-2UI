@@ -1,23 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using ANightsTaleUI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
 namespace ANightsTaleUI.Controllers
 {
-    public class CharacterController : Controller
+    public class CharacterController : AServiceController
     {
+        public CharacterController(HttpClient httpClient, IConfiguration configuration)
+        : base(httpClient, configuration)
+        {
+        }
 
-		static string url = "https://localhost:44369/api/Character";
+        static string url = "https://localhost:44369/api/Character";
 		// GET: Character
 		public async Task<ActionResult> Index()
         {
-			var models = new List<Character>();
+
+            var account = ViewData["accountDetails"] as AccountDetails;
+
+
+
+            var models = new List<Character>();
 			using (var httpClient = new HttpClient())
 			{
 				var Response = await httpClient.GetAsync(url);
@@ -31,6 +42,69 @@ namespace ANightsTaleUI.Controllers
 
 			return View(models);
 		}
+
+        public async Task<ActionResult> CampaignList(int campId)
+        {
+            var account = ViewData["accountDetails"] as AccountDetails;
+
+            HttpRequestMessage request = CreateRequestToService(HttpMethod.Get,
+                Configuration["ServiceEndpoints:Campaign"]);
+
+            HttpResponseMessage response;
+            try
+            {
+                response = await HttpClient.SendAsync(request);
+            }
+            catch (HttpRequestException)
+            {
+                return View("Error", new ErrorViewModel());
+            }
+
+            if (!response.IsSuccessStatusCode)
+            {
+                if (response.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+                return View("Error", new ErrorViewModel());
+            }
+            var jsonString = await response.Content.ReadAsStringAsync();
+            List<Campaign> campaigns = JsonConvert.DeserializeObject<List<Campaign>>(jsonString);
+
+            return View(campaigns);
+        }
+
+        public async Task<ActionResult> CharCampUsr(int id, string username)
+        {
+            //username
+            //var account = ViewData["accountDetails"] as AccountDetails;
+
+            HttpRequestMessage request = CreateRequestToService(HttpMethod.Get,
+                $"{Configuration["ServiceEndpoints:Character"]}/{id}?username={username}");
+
+            HttpResponseMessage response;
+            try
+            {
+                response = await HttpClient.SendAsync(request);
+            }
+            catch (HttpRequestException)
+            {
+                return View("Error", new ErrorViewModel());
+            }
+
+            if (!response.IsSuccessStatusCode)
+            {
+                if (response.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+                return View("Error", new ErrorViewModel());
+            }
+            var jsonString = await response.Content.ReadAsStringAsync();
+            List<Character> characters = JsonConvert.DeserializeObject<List<Character>>(jsonString);
+
+            return View(characters);
+        }
 
         // GET: Character/Details/5
         public async Task<ActionResult> Details(int id)
