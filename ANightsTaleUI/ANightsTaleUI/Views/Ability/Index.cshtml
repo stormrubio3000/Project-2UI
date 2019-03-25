@@ -55,6 +55,12 @@
 
 <h2>Abilities</h2>
 
+@if (account?.Roles?.Contains("admin") ?? false)
+{
+<form method="get">
+    <button asp-controller="Ability" asp-action="Create" class="btn-create">Create New</button>
+</form>
+}
 <table class="table">
     <thead>
         <tr>

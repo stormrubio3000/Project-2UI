@@ -46,7 +46,9 @@
 
 <h2>Items</h2>
 
-<button asp-action="Create" class="btn-create">Create New</button>
+<form method="get">
+    <button asp-controller="Item" asp-action="Create" class="btn-create">Create New</button>
+</form>
 
 <table class="table">
     <thead>
