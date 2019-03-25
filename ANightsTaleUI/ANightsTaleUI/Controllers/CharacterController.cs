@@ -80,7 +80,8 @@ namespace ANightsTaleUI.Controllers
             //var account = ViewData["accountDetails"] as AccountDetails;
 
             HttpRequestMessage request = CreateRequestToService(HttpMethod.Get,
-                $"{Configuration["ServiceEndpoints:Character"]}/{id}?username={username}");
+                Configuration["ServiceEndpoints:AccountCharacter"] + "/" + "CharCampUsr" + "/" + id + "?username=" + username);
+
 
             HttpResponseMessage response;
             try
