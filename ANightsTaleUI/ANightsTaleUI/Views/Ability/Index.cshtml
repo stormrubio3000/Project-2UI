@@ -45,7 +45,11 @@
     .btn-create {
         background-color: forestgreen;
         font-family: "IM Fell DW Pica SC";
-        margin-bottom: 10px
+        margin-bottom: 10px;
+        color: black;
+        width :100px;
+        border :double
+
     }
 </style>
 
@@ -53,7 +57,7 @@
 
 @if (account?.Roles?.Contains("admin") ?? false)
 {
-    <button asp-action="Create" class="btn-create">Create New</button>
+
 }
 <table class="table">
     <thead>

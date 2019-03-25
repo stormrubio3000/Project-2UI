@@ -80,7 +80,7 @@ namespace ANightsTaleUI.Controllers
             //var account = ViewData["accountDetails"] as AccountDetails;
 
             HttpRequestMessage request = CreateRequestToService(HttpMethod.Get,
-                $"{Configuration["ServiceEndpoints:Character"]}/{id}?username={username}");
+                Configuration["ServiceEndpoints:AccountCharacter"] + "/" + "CharCampUsr" + "/" + id +"?username=" + username);
 
             HttpResponseMessage response;
             try
@@ -101,6 +101,7 @@ namespace ANightsTaleUI.Controllers
                 return View("Error", new ErrorViewModel());
             }
             var jsonString = await response.Content.ReadAsStringAsync();
+            
             List<Character> characters = JsonConvert.DeserializeObject<List<Character>>(jsonString);
 
             return View(characters);
