@@ -72,14 +72,14 @@ namespace ANightsTaleUI.Controllers
         // POST: Ability/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Abilities collection)
+        public async Task<ActionResult> Create(Abilities collection)
         {
 			try
 			{
 				using (var httpClient = new HttpClient())
 				{
 					var request = CreateRequestToService(HttpMethod.Post, url, collection);
-					var Response = httpClient.SendAsync(request);
+					var Response = await httpClient.SendAsync(request);
 				}
                 return RedirectToAction(nameof(Index));
             }

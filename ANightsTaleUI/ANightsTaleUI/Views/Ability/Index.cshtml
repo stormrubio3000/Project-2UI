@@ -53,7 +53,7 @@
 
 @if (account?.Roles?.Contains("admin") ?? false)
 {
-    <button asp-action="Create" class="btn-create">Create New</button>
+    <a asp-action="Create" class="btn-create">Create New</a>
 }
 <table class="table">
     <thead>
