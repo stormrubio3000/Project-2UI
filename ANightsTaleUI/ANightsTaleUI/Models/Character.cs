@@ -7,14 +7,13 @@ namespace ANightsTaleUI.Models
 {
 	public class Character
 	{
-
-		public int CharacterID { get; set; }
-		public int UserId { get; set; }
-		public string Name { get; set; }
+        public int CharacterID { get; set; }
+        public int UserID { get; set; }
+        public string Name { get; set; }
 		public string Bio { get; set; }
-		public int CampaignID { get; set; }
-		public int RaceID { get; set; }
-		public int ClassID { get; set; }
+		public string CampaignName { get; set; }
+		public string Race { get; set; }
+		public string Class { get; set; }
 		public int Experience { get; set; }
 		public int Level { get; set; }
 		public int Str { get; set; }
