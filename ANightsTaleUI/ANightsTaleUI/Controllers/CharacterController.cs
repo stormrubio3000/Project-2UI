@@ -148,50 +148,21 @@ namespace ANightsTaleUI.Controllers
             }
         }
 
-        // GET: Character/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+		public async Task<ActionResult> GetInventory(int id)
+		{
+			var models = new List<Item>();
+			using (var httpClient = new HttpClient())
+			{
+				var Response = await httpClient.GetAsync(url+ "/GetInv/" + id.ToString());
+				if (Response.IsSuccessStatusCode)
+				{
+					var jsonString = await Response.Content.ReadAsStringAsync();
+					List<Item> items = JsonConvert.DeserializeObject<List<Item>>(jsonString);
+					return View(items);
+				}
+			}
 
-        // POST: Character/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Character/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Character/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+			return View(models);
+		}
     }
 }
