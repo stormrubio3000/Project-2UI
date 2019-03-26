@@ -146,7 +146,7 @@ namespace ANightsTaleUI.Controllers
 			using (var httpClient = new HttpClient())
 			{
 
-				var Response = await httpClient.GetAsync(url + "/" + id.ToString());
+				var Response = await httpClient.GetAsync(url+"/GetCharacter/" + id.ToString());
 				if (Response.IsSuccessStatusCode)
 				{
 					var jsonString = await Response.Content.ReadAsStringAsync();
@@ -186,7 +186,7 @@ namespace ANightsTaleUI.Controllers
 			var models = new List<Item>();
 			using (var httpClient = new HttpClient())
 			{
-				var Response = await httpClient.GetAsync(url+ "/GetInv/" + id.ToString());
+				var Response = await httpClient.GetAsync(url+ "/Inventory/" + id.ToString());
 				if (Response.IsSuccessStatusCode)
 				{
 					var jsonString = await Response.Content.ReadAsStringAsync();
