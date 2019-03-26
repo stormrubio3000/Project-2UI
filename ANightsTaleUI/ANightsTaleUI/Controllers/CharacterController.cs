@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using ANightsTaleUI.Models;
+using ANightsTaleUI.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -76,34 +77,66 @@ namespace ANightsTaleUI.Controllers
 
         public async Task<ActionResult> CharCampUsr(int id, string username)
         {
-            //username
-            //var account = ViewData["accountDetails"] as AccountDetails;
+            HttpRequestMessage request1 = CreateRequestToService(HttpMethod.Get,
+                Configuration["ServiceEndpoints:AccountCharacter"] + "/" + "CharCampUsr" + "/" + id + "?username=" + username);
 
-            HttpRequestMessage request = CreateRequestToService(HttpMethod.Get,
-                $"{Configuration["ServiceEndpoints:Character"]}/{id}?username={username}");
 
-            HttpResponseMessage response;
+            HttpResponseMessage response1;
             try
             {
-                response = await HttpClient.SendAsync(request);
+                response1 = await HttpClient.SendAsync(request1);
             }
             catch (HttpRequestException)
             {
                 return View("Error", new ErrorViewModel());
             }
 
-            if (!response.IsSuccessStatusCode)
+            if (!response1.IsSuccessStatusCode)
             {
-                if (response.StatusCode == HttpStatusCode.Unauthorized)
+                if (response1.StatusCode == HttpStatusCode.Unauthorized)
                 {
                     return RedirectToAction("Login", "Account");
                 }
                 return View("Error", new ErrorViewModel());
             }
-            var jsonString = await response.Content.ReadAsStringAsync();
-            List<Character> characters = JsonConvert.DeserializeObject<List<Character>>(jsonString);
+            var jsonString1 = await response1.Content.ReadAsStringAsync();
+            
+            List<Character> charactersUsrCamp = JsonConvert.DeserializeObject<List<Character>>(jsonString1);
 
-            return View(characters);
+
+            HttpRequestMessage request2 = CreateRequestToService(HttpMethod.Get,
+                Configuration["ServiceEndpoints:AccountCharacter"] + "/" + id);
+
+
+            HttpResponseMessage response2;
+            try
+            {
+                response2 = await HttpClient.SendAsync(request2);
+            }
+            catch (HttpRequestException)
+            {
+                return View("Error", new ErrorViewModel());
+            }
+
+            if (!response2.IsSuccessStatusCode)
+            {
+                if (response2.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+                return View("Error", new ErrorViewModel());
+            }
+            var jsonString2 = await response2.Content.ReadAsStringAsync();
+
+            List<Character> charactersCamp = JsonConvert.DeserializeObject<List<Character>>(jsonString2);
+
+            CharactersLists charLists = new CharactersLists
+            {
+                campCharacters = charactersCamp,
+                usrCampCharacters = charactersUsrCamp
+            };
+
+            return View(charLists);
         }
 
         // GET: Character/Details/5

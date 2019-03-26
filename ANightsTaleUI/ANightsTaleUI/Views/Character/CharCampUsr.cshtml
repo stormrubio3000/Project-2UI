@@ -1,129 +1,268 @@
-﻿@model IEnumerable<ANightsTaleUI.Models.Character>
+﻿@model ANightsTaleUI.Models.ViewModels.CharactersLists
 
 @{
     ViewData["Title"] = "CharCampUsr";
 }
 
-<h1>Index</h1>
+<header>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=IM+Fell+DW+Pica+SC" />
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+</header>
+
+<style>
+body { background-image: url("http://s1.1zoom.me/big0/892/Diablo_III_Crows_Gothic_Fantasy_Night_516398_1280x619.jpg"); background-repeat: repeat }
+
+    h2, h4 {
+        font-family: "IM Fell DW Pica SC";
+        color: gold;
+    }
+
+    .table1,.table2 {
+        float: none;
+        margin: 0 auto;
+        background-color: lightgray;
+        border-style: double;
+        border-color: goldenrod;
+        margin-bottom : 20px
+    }
+
+    .data-name, .tag-name {
+        font-family: "IM Fell DW Pica SC";
+        padding: 10px
+    }
+
+    .ability {
+        width: 37px;
+        padding-right: 12px
+    }
+
+    .btn-create {
+        background-color: forestgreen;
+        font-family: "IM Fell DW Pica SC";
+        margin-bottom: 10px;
+        color: black;
+        width: 100px;
+        border: double
+    }
+</style>
+
+<h2>Characters</h2>
+<form method="get">
+    <button asp-controller="Character" asp-action="Create" class="btn-create">Create New</button>
+</form>
+<h4>Characters in Campaign:</h4>
+<table class="table1">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CharacterID)
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.campCharacters[0].Name)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserId)
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.campCharacters[0].Bio)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.campCharacters[0].CampaignID)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bio)
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.campCharacters[0].RaceID)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CampaignID)
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.campCharacters[0].ClassID)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RaceID)
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.campCharacters[0].Experience)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClassID)
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.campCharacters[0].Level)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Experience)
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.campCharacters[0].Str)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Level)
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.campCharacters[0].Dex)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Str)
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.campCharacters[0].Con)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Dex)
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.campCharacters[0].Int)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Con)
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.campCharacters[0].Wis)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Int)
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.campCharacters[0].Cha)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Wis)
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.campCharacters[0].Speed)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Speed)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaxHP)
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.campCharacters[0].MaxHP)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model.campCharacters)
+        {
+            <tr>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.Bio)
+                </td>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.CampaignID)
+                </td>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.RaceID)
+                </td>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.ClassID)
+                </td>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.Experience)
+                </td>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.Level)
+                </td>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.Str)
+                </td>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.Dex)
+                </td>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.Con)
+                </td>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.Int)
+                </td>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.Wis)
+                </td>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.Cha)
+                </td>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.Speed)
+                </td>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.MaxHP)
+                </td>
+                <td class = "data-name"> 
+                    @Html.ActionLink("Details", "Details", new { id = item.CharacterID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<h4>Your Characters:</h4>
+<table class="table2">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CharacterID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Bio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CampaignID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RaceID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClassID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Experience)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Level)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Str)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dex)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Con)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Int)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Wis)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Speed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaxHP)
-            </td>
-            <td>
-                @Html.ActionLink("Details", "Details", new {  id=item.CharacterID }) 
-            </td>
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.usrCampCharacters[0].Name)
+            </th>
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.usrCampCharacters[0].Bio)
+            </th>
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.usrCampCharacters[0].CampaignID)
+            </th>
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.usrCampCharacters[0].RaceID)
+            </th>
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.usrCampCharacters[0].ClassID)
+            </th>
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.usrCampCharacters[0].Experience)
+            </th>
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.usrCampCharacters[0].Level)
+            </th>
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.usrCampCharacters[0].Str)
+            </th>
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.usrCampCharacters[0].Dex)
+            </th>
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.usrCampCharacters[0].Con)
+            </th>
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.usrCampCharacters[0].Int)
+            </th>
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.usrCampCharacters[0].Wis)
+            </th>
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.usrCampCharacters[0].Cha)
+            </th>
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.usrCampCharacters[0].Speed)
+            </th>
+            <th class = "tag-name">
+                @Html.DisplayNameFor(model => model.usrCampCharacters[0].MaxHP)
+            </th>
+            <th></th>
         </tr>
-}
+    </thead>
+    <tbody>
+        @foreach (var item in Model.usrCampCharacters)
+        {
+            <tr>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.Bio)
+                </td>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.CampaignID)
+                </td>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.RaceID)
+                </td>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.ClassID)
+                </td>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.Experience)
+                </td>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.Level)
+                </td>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.Str)
+                </td>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.Dex)
+                </td>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.Con)
+                </td>
+                <td class = "data-name"> 
+                    @Html.DisplayFor(modelItem => item.Int)
+                </td>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.Wis)
+                </td>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.Cha)
+                </td>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.Speed)
+                </td>
+                <td class = "data-name">
+                    @Html.DisplayFor(modelItem => item.MaxHP)
+                </td>
+                <td class = "data-name">
+                    @Html.ActionLink("Details", "Details", new { id = item.CharacterID })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
