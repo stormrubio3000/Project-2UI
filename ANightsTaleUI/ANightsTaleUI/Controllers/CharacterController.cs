@@ -183,7 +183,7 @@ namespace ANightsTaleUI.Controllers
 
 		public async Task<ActionResult> GetInventory(int id)
 		{
-			var models = new List<Item>();
+			var models = new Inventorypass();
 			using (var httpClient = new HttpClient())
 			{
 				var Response = await httpClient.GetAsync(url+ "/Inventory/" + id.ToString());
@@ -191,11 +191,54 @@ namespace ANightsTaleUI.Controllers
 				{
 					var jsonString = await Response.Content.ReadAsStringAsync();
 					List<Item> items = JsonConvert.DeserializeObject<List<Item>>(jsonString);
-					return View(items);
+					var viewmodel = new Inventorypass() { items = items, charID = id };
+					return View(viewmodel);
 				}
 			}
 
 			return View(models);
 		}
-    }
+
+		public async Task<ActionResult> CreateInventory(int id)
+		{
+			var models = new ItemInv();
+			using (var httpClient = new HttpClient())
+			{
+				var Response = await httpClient.GetAsync("https://localhost:44369/api/Item");
+				if (Response.IsSuccessStatusCode)
+				{
+					var jsonString = await Response.Content.ReadAsStringAsync();
+					List<Item> items = JsonConvert.DeserializeObject<List<Item>>(jsonString);
+					var viewmodel = new ItemInv { items = items, charID=id };
+					return View(viewmodel);
+				}
+
+
+			}
+			return View(models);
+		}
+
+		// POST: Character/Create
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<ActionResult> CreateInventory(ItemInv selection)
+		{
+			var collection = new Inventory() { CharacterID = selection.charID,
+				ItemID = selection.item.ItemID, Quantity = selection.quantity, ToggleE = false };
+			try
+			{
+				using (var httpClient = new HttpClient())
+				{
+					var request = CreateRequestToService(HttpMethod.Post, url + "/Inventory" , collection);
+					var Response = await httpClient.SendAsync(request);
+				}
+
+				return RedirectToAction(nameof(GetInventory),new { id = selection.charID });
+			}
+			catch
+			{
+				return View();
+			}
+		}
+	}
 }
