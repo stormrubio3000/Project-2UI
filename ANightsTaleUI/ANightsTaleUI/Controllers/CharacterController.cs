@@ -105,7 +105,7 @@ namespace ANightsTaleUI.Controllers
 
 
             HttpRequestMessage request2 = CreateRequestToService(HttpMethod.Get,
-                Configuration["ServiceEndpoints:AccountCharacter"] + "/" + "CharCampUsr" + "/" + id);
+                Configuration["ServiceEndpoints:AccountCharacter"] + "/" + id);
 
 
             HttpResponseMessage response2;
@@ -120,13 +120,13 @@ namespace ANightsTaleUI.Controllers
 
             if (!response2.IsSuccessStatusCode)
             {
-                if (response1.StatusCode == HttpStatusCode.Unauthorized)
+                if (response2.StatusCode == HttpStatusCode.Unauthorized)
                 {
                     return RedirectToAction("Login", "Account");
                 }
                 return View("Error", new ErrorViewModel());
             }
-            var jsonString2 = await response1.Content.ReadAsStringAsync();
+            var jsonString2 = await response2.Content.ReadAsStringAsync();
 
             List<Character> charactersCamp = JsonConvert.DeserializeObject<List<Character>>(jsonString2);
 
