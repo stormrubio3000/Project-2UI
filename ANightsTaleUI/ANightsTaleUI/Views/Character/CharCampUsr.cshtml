@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ANightsTaleUI.Models.Character>
+﻿@model ANightsTaleUI.Models.ViewModels.CharactersLists
 
 @{
     ViewData["Title"] = "CharCampUsr";
@@ -9,65 +9,82 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table1">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CharacterID)
+                @*@Html.DisplayNameFor(model => model.campCharacters.)*@
+                Character ID
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UserId)
+                @*@Html.DisplayNameFor(model => model.UserId)*@
+                User ID
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @*@Html.DisplayNameFor(model => model.Name)*@
+                Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Bio)
+                @*@Html.DisplayNameFor(model => model.Bio)*@
+                Bio
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CampaignID)
+                @*@Html.DisplayNameFor(model => model.CampaignID)*@
+                Campaign ID
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RaceID)
+                @*@Html.DisplayNameFor(model => model.RaceID)*@
+                Race ID
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ClassID)
+                @*@Html.DisplayNameFor(model => model.ClassID)*@
+                Class ID
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Experience)
+                @*@Html.DisplayNameFor(model => model.Experience)*@
+                Experience
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Level)
+                @*@Html.DisplayNameFor(model => model.Level)*@
+                Level
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Str)
+                @*@Html.DisplayNameFor(model => model.Str)*@
+                Str
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Dex)
+                @*@Html.DisplayNameFor(model => model.Dex)*@
+                Dex
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Con)
+                @*@Html.DisplayNameFor(model => model.Con)*@
+                Con
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Int)
+                @*@Html.DisplayNameFor(model => model.Int)*@
+                Int
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Wis)
+                @*@Html.DisplayNameFor(model => model.Wis)*@
+                Wis
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cha)
+                @*@Html.DisplayNameFor(model => model.Cha)*@
+                Cha
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Speed)
+                @*@Html.DisplayNameFor(model => model.Speed)*@
+                Speed
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MaxHP)
+                @*@Html.DisplayNameFor(model => model.MaxHP)*@
+                MaxHP
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.campCharacters) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.CharacterID)
@@ -125,5 +142,142 @@
             </td>
         </tr>
 }
+    </tbody>
+</table>
+
+<table class="table2">
+    <thead>
+        <tr>
+            <th>
+                @*@Html.DisplayNameFor(model => model.campCharacters.)*@
+                Character ID
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.UserId)*@
+                User ID
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Name)*@
+                Name
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Bio)*@
+                Bio
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.CampaignID)*@
+                Campaign ID
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.RaceID)*@
+                Race ID
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.ClassID)*@
+                Class ID
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Experience)*@
+                Experience
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Level)*@
+                Level
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Str)*@
+                Str
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Dex)*@
+                Dex
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Con)*@
+                Con
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Int)*@
+                Int
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Wis)*@
+                Wis
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Cha)*@
+                Cha
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Speed)*@
+                Speed
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.MaxHP)*@
+                MaxHP
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.usrCampCharacters)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CharacterID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CampaignID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RaceID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClassID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Experience)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Level)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Str)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dex)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Con)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Int)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Wis)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Speed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaxHP)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.CharacterID })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
