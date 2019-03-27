@@ -146,7 +146,7 @@ namespace ANightsTaleUI.Controllers
 			using (var httpClient = new HttpClient())
 			{
 
-				var Response = await httpClient.GetAsync(url + "/" + id.ToString());
+				var Response = await httpClient.GetAsync(url+"/GetCharacter/" + id.ToString());
 				if (Response.IsSuccessStatusCode)
 				{
 					var jsonString = await Response.Content.ReadAsStringAsync();
@@ -181,50 +181,69 @@ namespace ANightsTaleUI.Controllers
             }
         }
 
-        // GET: Character/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+		public async Task<ActionResult> GetInventory(int id)
+		{
+			var models = new Inventorypass();
+			using (var httpClient = new HttpClient())
+			{
+				var Response = await httpClient.GetAsync(url+ "/Inventory/" + id.ToString());
+				if (Response.IsSuccessStatusCode)
+				{
+					var jsonString = await Response.Content.ReadAsStringAsync();
+					List<Item> items = JsonConvert.DeserializeObject<List<Item>>(jsonString);
+					var viewmodel = new Inventorypass() { items = items, charID = id };
+					return View(viewmodel);
+				}
+			}
 
-        // POST: Character/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
+			return View(models);
+		}
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+		public async Task<ActionResult> CreateInventory(int id)
+		{
+			var models = new ItemInv();
+			using (var httpClient = new HttpClient())
+			{
+				var Response = await httpClient.GetAsync("https://localhost:44369/api/Item");
+				if (Response.IsSuccessStatusCode)
+				{
+					var jsonString = await Response.Content.ReadAsStringAsync();
+					List<Item> items = JsonConvert.DeserializeObject<List<Item>>(jsonString);
+					var viewmodel = new ItemInv { items = items, charID=id };
+					return View(viewmodel);
+				}
 
-        // GET: Character/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
-        // POST: Character/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+			}
+			return View(models);
+		}
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-    }
+		// POST: Character/Create
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<ActionResult> CreateInventory(ItemInv selection)
+		{
+			var collection = new Inventory() { CharacterID = selection.charID,
+				ItemID = selection.item.ItemID, Quantity = selection.quantity, ToggleE = false };
+			try
+			{
+				using (var httpClient = new HttpClient())
+				{
+					var request = CreateRequestToService(HttpMethod.Post, url + "/Inventory" , collection);
+					var Response = await httpClient.SendAsync(request);
+				}
+
+				return RedirectToAction(nameof(GetInventory),new { id = selection.charID });
+			}
+			catch
+			{
+				return View();
+			}
+		}
+
+
+
+
+
+	}
 }

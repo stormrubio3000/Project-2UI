@@ -1,0 +1,74 @@
+﻿@model ANightsTaleUI.Models.ViewModels.Inventorypass
+
+
+@{
+    ViewData["Title"] = "GetInventory";
+}
+
+<h1>GetInventory</h1>
+
+<p>
+    @Html.ActionLink("Add to Inventory", "CreateInventory", new { id = Model.charID })
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.items[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.items[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.items[0].Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.items[0].AC)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.items[0].NumDice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.items[0].NumSides)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.items[0].Mods)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.items[0].Effects)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.items)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AC)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumDice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumSides)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mods)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Effects)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
