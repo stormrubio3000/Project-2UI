@@ -77,7 +77,7 @@ namespace ANightsTaleUI.Controllers
 					var Response = await httpClient.SendAsync(request);
 				}
 
-				return RedirectToAction(nameof(GetAbilities),selection.charID);
+				return RedirectToAction(nameof(GetAbilities), new {id = selection.charID});
             }
             catch
             {
