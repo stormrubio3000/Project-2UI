@@ -1,0 +1,56 @@
+﻿@model ANightsTaleUI.Models.ViewModels.Abilitypass
+
+@{
+    ViewData["Title"] = "GetAbilities";
+}
+
+<h1>GetAbilities</h1>
+
+<p>
+    @Html.ActionLink("Add New Ability", "Create", new {  id=Model.charID  })
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Abilities[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Abilities[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Abilities[0].NumDice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Abilities[0].NumSides)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Abilities[0].Attack)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Abilities)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumDice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumSides)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Attack)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
