@@ -1,0 +1,58 @@
+﻿@model ANightsTaleUI.Models.ViewModels.Featpass
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<p>
+    @Html.ActionLink("Add New Feat", "Create", new { id = Model.charID })
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.feats[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.feats[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.feats[0].StatTable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.feats[0].StatType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.feats[0].Mods)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.feats)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FeatID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatTable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mods)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
