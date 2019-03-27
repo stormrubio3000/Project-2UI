@@ -12,6 +12,9 @@ namespace ANightsTaleUI.Models
 		public int CharacterID { get; set; }
 		public int UserId { get; set; }
         public int CampaignID { get; set; }
+        public string CampaignName { get; set; }
+        public string Race { get; set; }
+        public string Class { get; set; }
 
         [Required]
         [Display(Name = "Character Name")]
