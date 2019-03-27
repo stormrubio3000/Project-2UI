@@ -21,8 +21,10 @@ namespace ANightsTaleUI.Controllers
         }
 
         static string url = "https://localhost:44369/api/Character";
-		// GET: Character
-		public async Task<ActionResult> Index()
+        static string urlRace = "https://localhost:44369/api/Race";
+        static string urlClass = "https://localhost:44369/api/Class";
+        // GET: Character
+        public async Task<ActionResult> Index()
         {
 
             var account = ViewData["accountDetails"] as AccountDetails;
@@ -77,6 +79,8 @@ namespace ANightsTaleUI.Controllers
 
         public async Task<ActionResult> CharCampUsr(int id, string username)
         {
+            TempData["campaignId"] = id;
+
             HttpRequestMessage request1 = CreateRequestToService(HttpMethod.Get,
                 Configuration["ServiceEndpoints:AccountCharacter"] + "/" + "CharCampUsr" + "/" + id + "?username=" + username);
 
@@ -167,11 +171,52 @@ namespace ANightsTaleUI.Controllers
         // POST: Character/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(CreateCharacterViewModel charModel)
         {
             try
             {
-                // TODO: Add insert logic here
+                charModel.Character.CampaignID = (int)TempData["campaignId"];
+
+                using (var httpClient = new HttpClient())
+                {
+                    var Response1 = await httpClient.GetAsync(urlRace);
+                    if (Response1.IsSuccessStatusCode)
+                    {
+                        var jsonString = await Response1.Content.ReadAsStringAsync();
+                        charModel.Races = JsonConvert.DeserializeObject<List<Race>>(jsonString);
+                    }
+
+                    var Response2 = await httpClient.GetAsync(urlClass);
+                    if (Response2.IsSuccessStatusCode)
+                    {
+                        var jsonString = await Response2.Content.ReadAsStringAsync();
+                        charModel.Classes = JsonConvert.DeserializeObject<List<Class>>(jsonString);
+                    }
+
+                    return RedirectToAction(nameof(Create2), "Character", charModel);
+                }  
+                
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Character/Create
+        public ActionResult Create2(CreateCharacterViewModel charModel)
+        {
+
+            return View();
+        }
+
+        // POST: Character/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create2Post(CreateCharacterViewModel charModel)
+        {
+            try
+            {
 
                 return RedirectToAction(nameof(Index));
             }
