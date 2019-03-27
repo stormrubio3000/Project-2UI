@@ -237,7 +237,7 @@ namespace ANightsTaleUI.Controllers
 			}
 			catch
 			{
-				return View();
+				return View(selection);
 			}
 		}
 

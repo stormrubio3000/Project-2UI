@@ -41,26 +41,49 @@ namespace ANightsTaleUI.Controllers
 		}
 
         // GET: CharFeats/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create(int id)
         {
-            return View();
-        }
+			var models = new Featpass();
+			using (var httpClient = new HttpClient())
+			{
+				var Response = await httpClient.GetAsync("https://localhost:44369/api/Feat");
+				if (Response.IsSuccessStatusCode)
+				{
+					var jsonString = await Response.Content.ReadAsStringAsync();
+					List<Feats> feats = JsonConvert.DeserializeObject<List<Feats>>(jsonString);
+					var viewmodel = new Featpass { feats = feats, charID = id };
+					return View(viewmodel);
+				}
+
+
+			}
+			return View(models);
+		}
 
         // POST: CharFeats/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(Featpass selection)
         {
-            try
-            {
-                // TODO: Add insert logic here
+			var collection = new CharFeats()
+			{
+				CharacterId = selection.charID,
+				FeatId = selection.feat.FeatID
+			};
+			try
+			{
+				using (var httpClient = new HttpClient())
+				{
+					var request = CreateRequestToService(HttpMethod.Post, url + "/", collection);
+					var Response = await httpClient.SendAsync(request);
+				}
 
-                return RedirectToAction(nameof(Details));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+				return RedirectToAction(nameof(Details), new { id = selection.charID });
+			}
+			catch
+			{
+				return View(selection);
+			}
+		}
     }
 }
