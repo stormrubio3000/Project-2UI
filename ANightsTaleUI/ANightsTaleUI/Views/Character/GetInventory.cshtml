@@ -5,36 +5,75 @@
     ViewData["Title"] = "GetInventory";
 }
 
-<h1>GetInventory</h1>
+<header>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=IM+Fell+DW+Pica+SC" />
+
+</header>
+
+<style>
+body { background-image: url("https://wallpapercave.com/wp/Mji0eJV.jpg"); background-repeat: no-repeat }
+
+
+    h1, p , .back {
+        font-family: "IM Fell DW Pica SC";
+        color: gold;
+    }
+
+    .links {
+        font-family: "IM Fell DW Pica SC";
+        color: gold;
+        font-weight: bold;
+    }
+
+    .table {
+        float: none;
+        margin: 0 auto;
+        background-color: lightgray;
+        border-style: double;
+        border-color: goldenrod
+    }
+
+    .tag-name, .data-name {
+        font-family: "IM Fell DW Pica SC";
+    }
+
+    .btn-create {
+        background-color: forestgreen;
+        font-family: "IM Fell DW Pica SC";
+        margin-bottom: 10px
+    }
+</style>
+
+<h1>Characters Inventory</h1>
 
 <p>
-    @Html.ActionLink("Add to Inventory", "CreateInventory", new { id = Model.charID })
+    @Html.ActionLink("Add to Inventory", "CreateInventory", new { id = Model.charID }, new { @class = "links" })
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.items[0].Name)
             </th>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.items[0].Description)
             </th>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.items[0].Type)
             </th>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.items[0].AC)
             </th>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.items[0].NumDice)
             </th>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.items[0].NumSides)
             </th>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.items[0].Mods)
             </th>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.items[0].Effects)
             </th>
             <th></th>
@@ -44,28 +83,28 @@
         @foreach (var item in Model.items)
         {
             <tr>
-                <td>
+                <td class="data-name">
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
-                <td>
+                <td class="data-name">
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
-                <td>
+                <td class="data-name">
                     @Html.DisplayFor(modelItem => item.Type)
                 </td>
-                <td>
+                <td class="data-name">
                     @Html.DisplayFor(modelItem => item.AC)
                 </td>
-                <td>
+                <td class="data-name">
                     @Html.DisplayFor(modelItem => item.NumDice)
                 </td>
-                <td>
+                <td class="data-name">
                     @Html.DisplayFor(modelItem => item.NumSides)
                 </td>
-                <td>
+                <td class="data-name">
                     @Html.DisplayFor(modelItem => item.Mods)
                 </td>
-                <td>
+                <td class="data-name">
                     @Html.DisplayFor(modelItem => item.Effects)
                 </td>
             </tr>

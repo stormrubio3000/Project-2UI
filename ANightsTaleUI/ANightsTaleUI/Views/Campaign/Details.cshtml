@@ -3,11 +3,55 @@
 @{
     ViewData["Title"] = "Details";
 }
+<header>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=IM+Fell+DW+Pica+SC" />
 
-<h1>Details</h1>
+</header>
+
+<style>
+body { background-image: url("https://fondos.fondoshd.com/images/hd/ciudad-de-fantasia-5200632e4f533.jpg"); background-repeat: no-repeat }
+
+    h2, .back {
+        font-family: "IM Fell DW Pica SC";
+        color: gold;
+        margin-top : 20px
+    }
+
+    .table {
+        float: none;
+        margin: 0 auto;
+        background-color: lightgray;
+        border-style: double;
+        border-color: goldenrod
+    }
+
+    .col-sm-10 {
+        font-family: "IM Fell DW Pica SC";
+        color: greenyellow;
+        font-size: 22px;
+        font-weight: bold
+    }
+
+    .col-sm-2 {
+        font-family: "IM Fell DW Pica SC";
+        color: gold;
+        font-size: 22px;
+    }
+
+    .dta-name, .tag-name {
+        font-family: "IM Fell DW Pica SC";
+    }
+
+    .btn-create {
+        background-color: forestgreen;
+        font-family: "IM Fell DW Pica SC";
+        margin-bottom: 10px
+    }
+</style>
+
+<h2>Campaign Details</h2>
 
 <div>
-    <h4>Campaign</h4>
 
     <form method="get">
         <button asp-controller="Campaign" asp-action="CreateInfo" class="btn-create">Create New Info</button>
@@ -33,12 +77,12 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>
+                    <th class="tag-name">
                         @* this and other lambdas for razor are never "actually executed" *@
                         @* they are just looked at by the rendering engine *@
                         @Html.DisplayNameFor(model => model.infos.First().Type)
                     </th>
-                    <th>
+                    <th class="tag-name">
                         @Html.DisplayNameFor(model => model.infos.First().Message)
                     </th>
                     <th></th>
@@ -48,10 +92,10 @@
                 @foreach (var item in Model.infos)
                 {
                     <tr>
-                        <td>
+                        <td class="dta-name">
                             @Html.DisplayFor(modelItem => item.Type)
                         </td>
-                        <td>
+                        <td class="dta-name">
                             @Html.DisplayFor(modelItem => item.Message)
                         </td>
                     </tr>
@@ -64,6 +108,5 @@
 
 
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="back">Back to List</a>
 </div>

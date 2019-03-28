@@ -4,9 +4,51 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
 
-<h4>Abilities</h4>
+<header>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=IM+Fell+DW+Pica+SC" />
+
+</header>
+
+<style>
+    body {
+        background-image: url("https://c.wallhere.com/photos/f4/17/1440x1080_px_1dekao_2moons_action_ages_castle_dekaron_fantasy-1487177.jpg!d");
+        background-repeat: no-repeat
+    }
+
+    h2, .back {
+        font-family: "IM Fell DW Pica SC";
+        color: gold;
+        margin-top: 20px
+    }
+
+    .control-label, .form-check-label, #btn1, #btn2 {
+        font-family: "IM Fell DW Pica SC";
+    }
+
+
+    .row {
+        background-color: lightgray;
+        border-style: double;
+        border-color: goldenrod;
+        width: 600px
+    }
+
+    .form-control {
+        font-family: "IM Fell DW Pica SC";
+        border-style: double;
+        border-color: goldenrod
+    }
+
+    .btn-btn-primary {
+        background-color: forestgreen;
+        font-family: "IM Fell DW Pica SC";
+        margin-bottom: 10px
+    }
+</style>
+
+<h2>Abilities Creation</h2>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -34,19 +76,19 @@
             </div>
             <div class="form-group">
                 <label asp-for="Attack" class="control-label"></label> <br>
-                <input type="radio" name="Attack" value="True" checked > True <br>
-                <input type="radio" name="Attack" value="False"> False <br>
+                <input id="btn1" type="radio" name="Attack" value="True" checked class="radio-btn"> True <br>
+                <input id="btn2" type="radio" name="Attack" value="False" class="radio-btn"> False <br>
                 <span asp-validation-for="Attack" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn-btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="back">Back to List</a>
 </div>
 
 @section Scripts {

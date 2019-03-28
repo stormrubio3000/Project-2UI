@@ -48,7 +48,8 @@ namespace ANightsTaleUI.Controllers
         // GET: Campaign/Details/5
         public async Task<ActionResult> Details(int id)
         {
-			var model = new Campaign();
+            TempData["campaignId"] = id;
+            var model = new Campaign();
 			using (var httpClient = new HttpClient())
 			{
 
@@ -93,7 +94,8 @@ namespace ANightsTaleUI.Controllers
 
         public async Task<ActionResult> DetailsAsync(int id)
         {
-            TempData["campId"]
+            
+
             HttpRequestMessage request = CreateRequestToService(HttpMethod.Get,
                 Configuration["ServiceEndpoints:AccountCampaign"] + "/" + id);
 
@@ -129,8 +131,10 @@ namespace ANightsTaleUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateInfo(int id, Info info)
+        public async Task<ActionResult> CreateInfo(Info info)
         {
+            info.CampaignID = (int)TempData["campaignId"];
+
             if (!ModelState.IsValid)
             {
                 return View(info);
