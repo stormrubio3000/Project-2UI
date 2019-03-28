@@ -29,6 +29,11 @@
                         asp-items="@(new SelectList(Model.Races, "RaceID", "Name"))" class="form-control"></select>
             </div>
             <div class="form-group">
+                <label asp-for="Classes.First().Name" class="control-label"></label>
+                <select asp-for="Character.ClassID"
+                        asp-items="@(new SelectList(Model.Classes, "ClassID", "Name"))" class="form-control"></select>
+            </div>
+            <div class="form-group">
                 <input asp-for="Character.Name" type="hidden" value=@Model.Character.Name class="form-control" />
                 <span asp-validation-for="Character.Name" class="text-danger"></span>
             </div>
@@ -49,8 +54,16 @@
                 <span asp-validation-for="Character.RaceID" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <input asp-for="Character.ClassID" type="hidden" value=@Model.Character.ClassID class="form-control" />
+                <span asp-validation-for="Character.ClassID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input asp-for="Races" type="hidden" value=@Model.Races class="form-control" />
                 <span asp-validation-for="Races" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Classes" type="hidden" value=@Model.Classes class="form-control" />
+                <span asp-validation-for="Classes" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Next" class="btn btn-primary" />

@@ -177,6 +177,13 @@ namespace ANightsTaleUI.Controllers
                     var jsonString = await Response.Content.ReadAsStringAsync();
                     model.Races = JsonConvert.DeserializeObject<List<Race>>(jsonString);
                 }
+
+                var Response2 = await httpClient.GetAsync(urlClass);
+                if (Response.IsSuccessStatusCode)
+                {
+                    var jsonString = await Response2.Content.ReadAsStringAsync();
+                    model.Classes = JsonConvert.DeserializeObject<List<Class>>(jsonString);
+                }
             }
 
                 return View(model);
@@ -202,15 +209,15 @@ namespace ANightsTaleUI.Controllers
         {
             var charModel = new CreateCharacterViewModel();
             charModel.Character = character;
-            charModel.Classes = new List<Class>();
+            charModel.Skills = new List<Skill>();
 
             using (var httpClient = new HttpClient())
             {
-                var Response = await httpClient.GetAsync(urlClass);
+                var Response = await httpClient.GetAsync(url + "/Class/" + character.ClassID.ToString());
                 if (Response.IsSuccessStatusCode)
                 {
                     var jsonString = await Response.Content.ReadAsStringAsync();
-                    charModel.Classes = JsonConvert.DeserializeObject<List<Class>>(jsonString);
+                    charModel.Skills = JsonConvert.DeserializeObject<List<Skill>>(jsonString);
                 }
 
 
