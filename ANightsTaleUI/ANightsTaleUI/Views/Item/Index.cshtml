@@ -4,6 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
+@{
+    var account = ViewData["accountDetails"] as ANightsTaleUI.Models.AccountDetails;
+}
+
 <header>
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=IM+Fell+DW+Pica+SC" />
 
@@ -46,76 +50,79 @@
 
 <h2>Items</h2>
 
-<form method="get">
-    <button asp-controller="Item" asp-action="Create" class="btn-create">Create New</button>
-</form>
+@if (account?.Roles?.Contains("admin") ?? false)
+{
+    <form method="get">
+        <button asp-controller="Item" asp-action="Create" class="btn-create">Create New</button>
+    </form>
+}
 
-<table class="table">
-    <thead>
-        <tr>
-            <th class="tag-name">
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th class="tag-name">
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th class="tag-name">
-                @Html.DisplayNameFor(model => model.Type)
-            </th>
-            <th class="tag-name">
-                @Html.DisplayNameFor(model => model.AC)
-            </th>
-            <th class="tag-name">
-                @Html.DisplayNameFor(model => model.NumDice)
-            </th>
-            <th class="tag-name">
-                @Html.DisplayNameFor(model => model.NumSides)
-            </th>
-            <th class="tag-name">
-                @Html.DisplayNameFor(model => model.Mods)
-            </th>
-            <th class="tag-name">
-                @Html.DisplayNameFor(model => model.Effects)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <table class="table">
+        <thead>
             <tr>
-                <td class="data-name">
-                    <div>
-                        <img src="https://cdn3.iconfinder.com/data/icons/basic-mobile-part-2/512/protection-512.png" class="item">
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </div>
-                </td>
-                <td class="data-name">
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td class="data-name">
-                    @Html.DisplayFor(modelItem => item.Type)
-                </td>
-                <td class="data-name">
-                    @Html.DisplayFor(modelItem => item.AC)
-                </td>
-                <td class="data-name">
-                    @Html.DisplayFor(modelItem => item.NumDice)
-                </td>
-                <td class="data-name">
-                    @Html.DisplayFor(modelItem => item.NumSides)
-                </td>
-                <td class="data-name">
-                    @Html.DisplayFor(modelItem => item.Mods)
-                </td>
-                <td class="data-name">
-                    @Html.DisplayFor(modelItem => item.Effects)
-                </td>
-                <td class="data-name">
-                    @Html.ActionLink("Details", "Details", new { id = item.ItemID }) |
-                </td>
+                <th class="tag-name">
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th class="tag-name">
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th class="tag-name">
+                    @Html.DisplayNameFor(model => model.Type)
+                </th>
+                <th class="tag-name">
+                    @Html.DisplayNameFor(model => model.AC)
+                </th>
+                <th class="tag-name">
+                    @Html.DisplayNameFor(model => model.NumDice)
+                </th>
+                <th class="tag-name">
+                    @Html.DisplayNameFor(model => model.NumSides)
+                </th>
+                <th class="tag-name">
+                    @Html.DisplayNameFor(model => model.Mods)
+                </th>
+                <th class="tag-name">
+                    @Html.DisplayNameFor(model => model.Effects)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="data-name">
+                        <div>
+                            <img src="https://cdn3.iconfinder.com/data/icons/basic-mobile-part-2/512/protection-512.png" class="item">
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </div>
+                    </td>
+                    <td class="data-name">
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td class="data-name">
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td class="data-name">
+                        @Html.DisplayFor(modelItem => item.AC)
+                    </td>
+                    <td class="data-name">
+                        @Html.DisplayFor(modelItem => item.NumDice)
+                    </td>
+                    <td class="data-name">
+                        @Html.DisplayFor(modelItem => item.NumSides)
+                    </td>
+                    <td class="data-name">
+                        @Html.DisplayFor(modelItem => item.Mods)
+                    </td>
+                    <td class="data-name">
+                        @Html.DisplayFor(modelItem => item.Effects)
+                    </td>
+                    <td class="data-name">
+                        @Html.ActionLink("Details", "Details", new { id = item.ItemID }) |
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 

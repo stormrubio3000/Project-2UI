@@ -22,7 +22,7 @@ namespace ANightsTaleUI.Models
 		[Required]
 		public int StatType { get; set; }
 
-
-		public int Mods { get; set; }
+        [Range(0.0, 30.0, ErrorMessage = "The value must be greater tha 0")]
+        public int Mods { get; set; }
 	}
 }
