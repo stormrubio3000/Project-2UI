@@ -60,7 +60,7 @@ namespace ANightsTaleUI.Controllers
                 {
                     ModelState.AddModelError("", "Unexpected server error");
                 }
-                return View(login);
+                return View("Index");
             }
 
             var success = PassCookiesToClient(response);
@@ -142,7 +142,7 @@ namespace ANightsTaleUI.Controllers
                 {
                     return RedirectToAction("Login", "Account");
                 }
-                ModelState.AddModelError("", "Unexpected server error");
+                ModelState.AddModelError("", "Passwords must be at least 12 characters, one non alphanumeric character, one digit ('0'-'9').");
                 return View(user);
             }
 

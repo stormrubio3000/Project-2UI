@@ -4,9 +4,42 @@
     ViewData["Title"] = "CreateInventory";
 }
 
-<h1>CreateInventory</h1>
 
-<h4>ItemInv</h4>
+<header>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=IM+Fell+DW+Pica+SC" />
+
+</header>
+
+<style>
+body { background-image: url("https://i.pinimg.com/originals/ef/c9/45/efc9455ecaf898544fc5be135cb525b3.jpg"); background-repeat: no-repeat }
+
+
+    h1, p, .back {
+        font-family: "IM Fell DW Pica SC";
+        color: gold;
+    }
+
+    .row {
+        float: none;
+        margin: 0 auto;
+        background-color: lightgray;
+        border-style: double;
+        border-color: goldenrod
+    }
+
+    .form-group, .control-label .form-control, .col-md-4 {
+        font-family: "IM Fell DW Pica SC";
+    }
+
+    .btn-btn-primary {
+        background-color: forestgreen;
+        font-family: "IM Fell DW Pica SC";
+        margin-bottom: 10px
+    }
+</style>
+
+<h1>Add Item to Inventory</h1>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -25,14 +58,10 @@
                 <span asp-validation-for="quantity" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn-btn-primary" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

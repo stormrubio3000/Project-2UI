@@ -4,27 +4,66 @@
     ViewData["Title"] = "GetAbilities";
 }
 
-<h1>GetAbilities</h1>
+<header>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=IM+Fell+DW+Pica+SC" />
+
+</header>
+
+<style>
+body { background-image: url("https://wallpapercave.com/wp/nqh2Y2Y.jpg"); background-repeat: no-repeat }
+
+
+    h1, p, .back {
+        font-family: "IM Fell DW Pica SC";
+        color: gold;
+    }
+
+    .links {
+        font-family: "IM Fell DW Pica SC";
+        color: gold;
+        font-weight: bold;
+    }
+
+    .table {
+        float: none;
+        margin: 0 auto;
+        background-color: lightgray;
+        border-style: double;
+        border-color: goldenrod
+    }
+
+    .tag-name, .data-name {
+        font-family: "IM Fell DW Pica SC";
+    }
+
+    .btn-create {
+        background-color: forestgreen;
+        font-family: "IM Fell DW Pica SC";
+        margin-bottom: 10px
+    }
+</style>
+
+<h1>Characters Abilities</h1>
 
 <p>
-    @Html.ActionLink("Add New Ability", "Create", new {  id=Model.charID  })
+    @Html.ActionLink("Add New Ability", "Create", new { id = Model.charID }, new { @class = "links" })
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.Abilities[0].Name)
             </th>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.Abilities[0].Description)
             </th>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.Abilities[0].NumDice)
             </th>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.Abilities[0].NumSides)
             </th>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.Abilities[0].Attack)
             </th>
             <th></th>
@@ -34,19 +73,19 @@
         @foreach (var item in Model.Abilities)
         {
             <tr>
-                <td>
+                <td class="data-name">
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
-                <td>
+                <td class="data-name">
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
-                <td>
+                <td class="data-name">
                     @Html.DisplayFor(modelItem => item.NumDice)
                 </td>
-                <td>
+                <td class="data-name">
                     @Html.DisplayFor(modelItem => item.NumSides)
                 </td>
-                <td>
+                <td class="data-name">
                     @Html.DisplayFor(modelItem => item.Attack)
                 </td>
             </tr>

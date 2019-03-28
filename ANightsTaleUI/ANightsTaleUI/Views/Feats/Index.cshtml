@@ -4,13 +4,20 @@
     ViewData["Title"] = "Index";
 }
 
+@{
+    var account = ViewData["accountDetails"] as ANightsTaleUI.Models.AccountDetails;
+}
+
 <header>
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=IM+Fell+DW+Pica+SC" />
 
 </header>
 
 <style>
-body { background-image: url("http://3.bp.blogspot.com/-v3cse6mqGzc/U1Zu6zadSYI/AAAAAAAADMU/iiAvD8g6cQM/s1600/shore-5mmsmm.jpg"); background-repeat: no-repeat }
+    body {
+        background-image: url("http://3.bp.blogspot.com/-v3cse6mqGzc/U1Zu6zadSYI/AAAAAAAADMU/iiAvD8g6cQM/s1600/shore-5mmsmm.jpg");
+        background-repeat: no-repeat
+    }
 
     h2 {
         font-family: "IM Fell DW Pica SC";
@@ -43,9 +50,12 @@ body { background-image: url("http://3.bp.blogspot.com/-v3cse6mqGzc/U1Zu6zadSYI/
 
 <h2>Feats</h2>
 
-<form method="get">
-    <button asp-controller="Feats" asp-action="Create" class="btn-create">Create New</button>
-</form>
+@if (account?.Roles?.Contains("admin") ?? false)
+{
+    <form method="get">
+        <button asp-controller="Feats" asp-action="Create" class="btn-create">Create New</button>
+    </form>
+}
 
 <table class="table">
     <thead>

@@ -4,27 +4,61 @@
     ViewData["Title"] = "Details";
 }
 
+<header>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=IM+Fell+DW+Pica+SC" />
+
+</header>
+
+<style>
+body { background-image: url("http://www.goodwp.com/images/201104/goodwp.com_17479.jpg"); background-repeat: no-repeat }
+
+
+    h1, p, .back {
+        font-family: "IM Fell DW Pica SC";
+        color: gold;
+    }
+
+    .links {
+        font-family: "IM Fell DW Pica SC";
+        color: gold;
+        font-weight: bold;
+    }
+
+    .table {
+        float: none;
+        margin: 0 auto;
+        background-color: lightgray;
+        border-style: double;
+        border-color: goldenrod
+    }
+
+    .tag-name, .data-name {
+        font-family: "IM Fell DW Pica SC";
+    }
+
+</style>
+
 <h1>Details</h1>
 
 <p>
-    @Html.ActionLink("Add New Feat", "Create", new { id = Model.charID })
+    @Html.ActionLink("Add New Feat", "Create", new { id = Model.charID }, new { @class = "links" })
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.feats[0].Name)
             </th>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.feats[0].Description)
             </th>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.feats[0].StatTable)
             </th>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.feats[0].StatType)
             </th>
-            <th>
+            <th class="tag-name">
                 @Html.DisplayNameFor(model => model.feats[0].Mods)
             </th>
             <th></th>
@@ -34,19 +68,19 @@
         @foreach (var item in Model.feats)
         {
             <tr>
-                <td>
+                <td class="data-name">
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
-                <td>
+                <td class="data-name">
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
-                <td>
+                <td class="data-name">
                     @Html.DisplayFor(modelItem => item.StatTable)
                 </td>
-                <td>
+                <td class="data-name">
                     @Html.DisplayFor(modelItem => item.StatType)
                 </td>
-                <td>
+                <td class="data-name">
                     @Html.DisplayFor(modelItem => item.Mods)
                 </td>
             </tr>
