@@ -140,10 +140,10 @@ body { background-image: url("http://t.wallpaperweb.org/wallpaper/3d_landscape/1
             @Html.ActionLink("Inventory", "GetInventory", new { id = Model.CharacterID })
         </dd>
         <dd class="data-name">
-            @Html.ActionLink("Abilities", "GetInventory", new { id = Model.CharacterID })
+            @Html.ActionLink("Abilities", "GetAbilities", "CharAbility", new { id = Model.CharacterID })
         </dd>
         <dd class="data-name">
-            @Html.ActionLink("Feats", "GetInventory", new { id = Model.CharacterID })
+            @Html.ActionLink("Feats", "Details","CharFeats", new { id = Model.CharacterID })
         </dd>
     </dl>
 </div>

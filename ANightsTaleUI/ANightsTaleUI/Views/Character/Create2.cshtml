@@ -1,0 +1,42 @@
+﻿@model ANightsTaleUI.Models.Character
+
+@{
+    ViewData["Title"] = "Create2";
+}
+
+<h1>Create2</h1>
+
+<h4>Character</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create2">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <select>
+                    <option value="1">Barbarian</option>
+                    <option value="2">Fighter</option>
+                    <option value="3">Paladin</option>
+                    <option value="4">Bard</option>
+                    <option value="5">Sorcerer</option>
+                    <option value="6">Cleric</option>
+                    <option value="7">Druid</option>
+                    <option value="8">Ranger</option>
+                    <option value="9">Rogue</option>
+                    <option value="10">Wizard</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Next" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
