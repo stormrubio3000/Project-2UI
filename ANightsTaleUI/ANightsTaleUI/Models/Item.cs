@@ -18,19 +18,20 @@ namespace ANightsTaleUI.Models
 		public string Description { get; set; }
 
 		[Required]
-		public int Type { get; set; }
+        [Range(0.0, 30.0,ErrorMessage = "The value must be greater tha 0")]
+        public int Type { get; set; }
 
+        [Range(0.0, 30.0, ErrorMessage = "The value must be greater tha 0")]
+        public int? AC { get; set; }
 
-		public int AC { get; set; }
+        [Range(0.0, 30.0, ErrorMessage = "The value must be greater tha 0")]
+        public int? NumDice { get; set; }
 
+        [Range(0.0, 30.0, ErrorMessage = "The value must be greater tha 0")]
+        public int? NumSides { get; set; }
 
-		public int? NumDice { get; set; }
-
-
-		public int? NumSides { get; set; }
-
-
-		public int? Mods { get; set; }
+        [Range(0.0, 30.0, ErrorMessage = "The value must be greater tha 0")]
+        public int? Mods { get; set; }
 
 		[Required]
 		public string Effects { get; set; }

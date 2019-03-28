@@ -52,7 +52,7 @@
 
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-bran" asp-area="" asp-controller="Home" asp-action="Index">A Nights Tale</a>
+                <a class="navbar-bran" asp-area="" asp-controller="Campaign" asp-action="Index">A Nights Tale</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -61,6 +61,14 @@
                     <form class="form-inline" asp-controller="Login" asp-action="Logout">
                         <span class="navbar-text-mr-sm-2">
                             @account.Username
+                            @if (account.Roles.Count().Equals(0))
+                            {
+                            <label class="control-label">(Player)</label>
+                            }
+                            else
+                            {
+                            <label class="control-label">(Game Master)</label>
+                            }
                         </span>
                         <button class="btn btn-outline-info" type="submit">Log out</button>
                     </form>

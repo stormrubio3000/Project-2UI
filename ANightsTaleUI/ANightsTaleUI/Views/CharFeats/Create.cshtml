@@ -4,9 +4,42 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<header>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=IM+Fell+DW+Pica+SC" />
 
-<h4>CharFeats</h4>
+</header>
+
+<style>
+body { background-image: url("https://wallpaperplay.com/walls/full/6/e/c/177033.jpg"); background-repeat: no-repeat }
+
+
+    h1, p, .back {
+        font-family: "IM Fell DW Pica SC";
+        color: gold;
+    }
+
+    .row {
+        float: none;
+        margin: 0 auto;
+        background-color: lightgray;
+        border-style: double;
+        border-color: goldenrod
+    }
+
+    .form-group, .control-label .form-control, .col-md-4 {
+        font-family: "IM Fell DW Pica SC";
+    }
+
+    .btn-btn-primary {
+        background-color: forestgreen;
+        font-family: "IM Fell DW Pica SC";
+        margin-bottom: 10px;
+        margin-top: 10px
+    }
+</style>
+
+<h1>Add Feats to Character</h1>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -20,7 +53,7 @@
             <select asp-for="feat.FeatID"
                     asp-items="@(new SelectList(Model.feats, "FeatID", "Name"))" class="form-control"></select>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn-btn-primary" />
             </div>
         </form>
     </div>

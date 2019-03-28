@@ -16,11 +16,11 @@ namespace ANightsTaleUI.Models
 		[Required]
 		public string Description { get; set; }
 
+        [Range(0.0, 30.0, ErrorMessage = "The value must be greater tha 0")]
+        public int? NumDice { get; set; }
 
-		public int? NumDice { get; set; }
-
-
-		public int? NumSides { get; set; }
+        [Range(0.0, 30.0, ErrorMessage = "The value must be greater tha 0")]
+        public int? NumSides { get; set; }
 
 
 		public bool? Attack { get; set; }
