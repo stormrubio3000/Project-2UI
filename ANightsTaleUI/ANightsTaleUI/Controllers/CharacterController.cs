@@ -167,7 +167,7 @@ namespace ANightsTaleUI.Controllers
         {
             var model = new CreateCharacterViewModel();
             model.Character = new Character();
-            model.Character.CampaignID = (int)TempData["campaignId"];
+            model.Character.CampaignID = (int)TempData.Peek("campaignId");
 
             using (var httpClient = new HttpClient())
             {
@@ -185,24 +185,11 @@ namespace ANightsTaleUI.Controllers
         // POST: Character/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(CreateCharacterViewModel charModel)
+        public ActionResult Create(CreateCharacterViewModel charModel)
         {
-            charModel.Classes = new List<Class>();
-
             try
             {
-                using (var httpClient = new HttpClient())
-                {
-                    var Response = await httpClient.GetAsync(urlClass);
-                    if (Response.IsSuccessStatusCode)
-                    {
-                        var jsonString = await Response.Content.ReadAsStringAsync();
-                        charModel.Classes = JsonConvert.DeserializeObject<List<Class>>(jsonString);
-                    }
-
-                    return RedirectToAction(nameof(Create2), "Character", charModel);
-                }  
-                
+                return RedirectToAction(nameof(Create2Get), "Character", charModel.Character);
             }
             catch
             {
@@ -210,17 +197,31 @@ namespace ANightsTaleUI.Controllers
             }
         }
 
-        // GET: Character/Create
-        public ActionResult Create2(CreateCharacterViewModel charModel)
+        // GET: Character/Create2Get
+        public async Task<ActionResult> Create2Get(Character character)
         {
+            var charModel = new CreateCharacterViewModel();
+            charModel.Character = character;
+            charModel.Classes = new List<Class>();
 
-            return View();
+            using (var httpClient = new HttpClient())
+            {
+                var Response = await httpClient.GetAsync(urlClass);
+                if (Response.IsSuccessStatusCode)
+                {
+                    var jsonString = await Response.Content.ReadAsStringAsync();
+                    charModel.Classes = JsonConvert.DeserializeObject<List<Class>>(jsonString);
+                }
+
+
+            }
+            return View(charModel);
         }
 
-        // POST: Character/Create
+        // POST: Character/Create2
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create2Post(CreateCharacterViewModel charModel)
+        public ActionResult Create2(CreateCharacterViewModel charModel)
         {
             try
             {
