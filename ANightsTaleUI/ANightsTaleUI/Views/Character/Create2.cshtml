@@ -1,4 +1,4 @@
-﻿@model ANightsTaleUI.Models.Character
+﻿@model ANightsTaleUI.Models.ViewModels.CreateCharacterViewModel
 
 @{
     ViewData["Title"] = "Create2";
@@ -13,28 +13,16 @@
         <form asp-action="Create2">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <select>
-                    <option value="1">Barbarian</option>
-                    <option value="2">Fighter</option>
-                    <option value="3">Paladin</option>
-                    <option value="4">Bard</option>
-                    <option value="5">Sorcerer</option>
-                    <option value="6">Cleric</option>
-                    <option value="7">Druid</option>
-                    <option value="8">Ranger</option>
-                    <option value="9">Rogue</option>
-                    <option value="10">Wizard</option>
-                </select>
+                <label asp-for="Classes.First().Name" class="control-label"></label>
+                <select asp-for="Character.ClassID"
+                        asp-items="@(new SelectList(Model.Classes, "ClassID", "Name"))" class="form-control"></select>
             </div>
+            @Html.ActionLink("Back", "Create")
             <div class="form-group">
                 <input type="submit" value="Next" class="btn btn-primary" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

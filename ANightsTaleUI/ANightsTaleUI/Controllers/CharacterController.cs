@@ -163,9 +163,23 @@ namespace ANightsTaleUI.Controllers
 		}
 
         // GET: Character/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View();
+            var model = new CreateCharacterViewModel();
+            model.Character = new Character();
+            model.Character.CampaignID = (int)TempData["campaignId"];
+
+            using (var httpClient = new HttpClient())
+            {
+                var Response = await httpClient.GetAsync(urlRace);
+                if (Response.IsSuccessStatusCode)
+                {
+                    var jsonString = await Response.Content.ReadAsStringAsync();
+                    model.Races = JsonConvert.DeserializeObject<List<Race>>(jsonString);
+                }
+            }
+
+                return View(model);
         }
 
         // POST: Character/Create
@@ -173,23 +187,16 @@ namespace ANightsTaleUI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(CreateCharacterViewModel charModel)
         {
+            charModel.Classes = new List<Class>();
+
             try
             {
-                charModel.Character.CampaignID = (int)TempData["campaignId"];
-
                 using (var httpClient = new HttpClient())
                 {
-                    var Response1 = await httpClient.GetAsync(urlRace);
-                    if (Response1.IsSuccessStatusCode)
+                    var Response = await httpClient.GetAsync(urlClass);
+                    if (Response.IsSuccessStatusCode)
                     {
-                        var jsonString = await Response1.Content.ReadAsStringAsync();
-                        charModel.Races = JsonConvert.DeserializeObject<List<Race>>(jsonString);
-                    }
-
-                    var Response2 = await httpClient.GetAsync(urlClass);
-                    if (Response2.IsSuccessStatusCode)
-                    {
-                        var jsonString = await Response2.Content.ReadAsStringAsync();
+                        var jsonString = await Response.Content.ReadAsStringAsync();
                         charModel.Classes = JsonConvert.DeserializeObject<List<Class>>(jsonString);
                     }
 
