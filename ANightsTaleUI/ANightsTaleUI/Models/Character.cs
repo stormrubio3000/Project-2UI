@@ -20,7 +20,6 @@ namespace ANightsTaleUI.Models
         [Display(Name = "Character Name")]
         public string Name { get; set; }
 
-        [Required]
         [Display(Name = "Character Bio")]
         public string Bio { get; set; }
 
