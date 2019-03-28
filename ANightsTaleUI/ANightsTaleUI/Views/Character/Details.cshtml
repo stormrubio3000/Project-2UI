@@ -4,10 +4,55 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<header>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=IM+Fell+DW+Pica+SC" />
+
+</header>
+
+<style>
+body { background-image: url("http://t.wallpaperweb.org/wallpaper/3d_landscape/1920x1080/3D_Fantasy_Places_HD_0019.jpg"); background-repeat: no-repeat }
+
+
+    h1, .back {
+        font-family: "IM Fell DW Pica SC";
+        color: gold;
+    }
+
+    .links {
+        font-family: "IM Fell DW Pica SC";
+        color: green;
+        margin: 20px;
+        font-weight : bold;
+        font-size: 20px
+    }
+
+    .row {
+        float: none;
+        margin: 0 auto;
+        background-color: lightgray;
+        border-style: double;
+        border-color: goldenrod
+    }
+
+    .col-sm-2, .col-sm-10 {
+        font-family: "IM Fell DW Pica SC";
+    }
+
+    .scroll {
+        width: 37px;
+        padding-right: 12px
+    }
+
+    .btn-create {
+        background-color: forestgreen;
+        font-family: "IM Fell DW Pica SC";
+        margin-bottom: 10px
+    }
+</style>
+
+<h1>Character Details</h1>
 
 <div>
-    <h4>Character</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -101,16 +146,16 @@
             @Html.DisplayFor(model => model.MaxHP)
         </dd>
         <dd class="data-name">
-            @Html.ActionLink("Inventory", "GetInventory", new { id = Model.CharacterID })
+            @Html.ActionLink("Inventory", "GetInventory", new { id = Model.CharacterID }, new {@class = "links"  })
         </dd>
         <dd class="data-name">
-            @Html.ActionLink("Abilities", "GetAbilities", "CharAbility", new { id = Model.CharacterID })
+            @Html.ActionLink("Abilities", "GetAbilities", "CharAbility", new { id = Model.CharacterID }, new { @class = "links" })
         </dd>
         <dd class="data-name">
-            @Html.ActionLink("Feats", "GetInventory", new { id = Model.CharacterID })
+            @Html.ActionLink("Feats", "Details","CharFeats", new { id = Model.CharacterID }, new { @class = "links" })
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="CharCampUsr">Back to List</a>
+    <a asp-action="CharCampUsr" class="back">Back to List</a>
 </div>

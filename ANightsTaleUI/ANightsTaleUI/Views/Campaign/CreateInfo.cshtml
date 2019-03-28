@@ -1,7 +1,7 @@
-﻿@model ANightsTaleUI.Models.Campaign
+﻿@model ANightsTaleUI.Models.Info
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "CreateInfo";
 }
 
 <header>
@@ -10,7 +10,7 @@
 </header>
 
 <style>
-body { background-image: url("https://c.wallhere.com/photos/f4/17/1440x1080_px_1dekao_2moons_action_ages_castle_dekaron_fantasy-1487177.jpg!d"); background-repeat: no-repeat }
+body { background-image: url("https://wallpapercave.com/wp/wp2770226.jpg"); background-repeat: no-repeat }
 
     h2, .back {
         font-family: "IM Fell DW Pica SC";
@@ -18,7 +18,7 @@ body { background-image: url("https://c.wallhere.com/photos/f4/17/1440x1080_px_1
         margin-top: 20px
     }
 
-    .control-label, .form-check-label {
+    .control-label {
         font-family: "IM Fell DW Pica SC";
     }
 
@@ -27,7 +27,6 @@ body { background-image: url("https://c.wallhere.com/photos/f4/17/1440x1080_px_1
         background-color: lightgray;
         border-style: double;
         border-color: goldenrod;
-        width: 600px
     }
 
     .form-control {
@@ -43,17 +42,22 @@ body { background-image: url("https://c.wallhere.com/photos/f4/17/1440x1080_px_1
     }
 </style>
 
-<h2>Campaign Creation</h2>
+<h2>Campaign Information</h2>
 
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="CreateInfo">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="Type" class="control-label"></label>
+                <input asp-for="Type" class="form-control" />
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Message" class="control-label"></label>
+                @Html.TextArea("Message", "", new { @class = "form-control" })
+                <span asp-validation-for="Message" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn-btn-primary" />
