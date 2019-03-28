@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using ANightsTaleUI.Models;
@@ -88,6 +89,79 @@ namespace ANightsTaleUI.Controllers
             {
                 return View();
             }
+        }
+
+        public async Task<ActionResult> DetailsAsync(int id)
+        {
+            TempData["campId"]
+            HttpRequestMessage request = CreateRequestToService(HttpMethod.Get,
+                Configuration["ServiceEndpoints:AccountCampaign"] + "/" + id);
+
+            HttpResponseMessage response;
+            try
+            {
+                response = await HttpClient.SendAsync(request);
+            }
+            catch (HttpRequestException)
+            {
+                return View("Error", new ErrorViewModel());
+            }
+
+            if (!response.IsSuccessStatusCode)
+            {
+                if (response.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+                return View("Error", new ErrorViewModel());
+            }
+            var jsonString = await response.Content.ReadAsStringAsync();
+
+            List<Campaign> charactersUsrCamp = JsonConvert.DeserializeObject<List<Campaign>>(jsonString);
+
+            return View();
+        }
+
+        public ActionResult CreateInfo()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreateInfo(int id, Info info)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(info);
+            }
+
+            HttpRequestMessage request = CreateRequestToService(HttpMethod.Post,
+                Configuration["ServiceEndpoints:AccountCampaign"] + "/" + "CreateInfo", info);
+
+            HttpResponseMessage response;
+
+            try
+            {
+                response = await HttpClient.SendAsync(request);
+            }
+            catch (HttpRequestException)
+            {
+                ModelState.AddModelError("", "Unexpected server error");
+                return View(info);
+            }
+
+            if (!response.IsSuccessStatusCode)
+            {
+                if (response.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+                ModelState.AddModelError("", "Unexpected server error");
+                return View(info);
+            }
+
+            return RedirectToAction("Index", "Campaign");
         }
     }
 }

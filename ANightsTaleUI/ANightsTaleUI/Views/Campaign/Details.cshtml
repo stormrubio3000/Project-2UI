@@ -8,16 +8,61 @@
 
 <div>
     <h4>Campaign</h4>
+
+    <form method="get">
+        <button asp-controller="Campaign" asp-action="CreateInfo" class="btn-create">Create New Info</button>
+    </form>
+
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
     </dl>
 </div>
+
+
+
+
+<div>
+    @if (Model.infos.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @* this and other lambdas for razor are never "actually executed" *@
+                        @* they are just looked at by the rendering engine *@
+                        @Html.DisplayNameFor(model => model.infos.First().Type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.infos.First().Message)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.infos)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Message)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+
+
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     <a asp-action="Index">Back to List</a>

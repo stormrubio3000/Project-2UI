@@ -14,5 +14,6 @@ namespace ANightsTaleUI.Models
 		[Display(Name = "Campaign Name")]
 		public string Name { get; set; }
 
-	}
+        public IEnumerable<Info> infos { get; set; }
+    }
 }
