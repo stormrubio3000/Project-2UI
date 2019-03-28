@@ -196,7 +196,7 @@ namespace ANightsTaleUI.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Create2Get), "Character", charModel.Character);
+                return RedirectToAction(nameof(Create2), "Character", charModel.Character);
             }
             catch
             {
@@ -205,7 +205,7 @@ namespace ANightsTaleUI.Controllers
         }
 
         // GET: Character/Create2Get
-        public async Task<ActionResult> Create2Get(Character character)
+        public async Task<ActionResult> Create2(Character character)
         {
             var charModel = new CreateCharacterViewModel();
             charModel.Character = character;
@@ -232,13 +232,19 @@ namespace ANightsTaleUI.Controllers
         {
             try
             {
-
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(GetRolls), "Character", charModel.Character);
             }
             catch
             {
                 return View();
             }
+        }
+
+        public ActionResult GetRolls(Character character)
+        {
+            var model = new CreateCharacterViewModel();
+            model.Character = character;
+            return View(model);
         }
 
 		public async Task<ActionResult> GetInventory(int id)

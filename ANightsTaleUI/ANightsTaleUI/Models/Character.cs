@@ -17,10 +17,10 @@ namespace ANightsTaleUI.Models
         public string Class { get; set; }
 
         [Required]
-        [Display(Name = "Character Name")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
 
-        [Display(Name = "Character Bio")]
+        [Display(Name = "Bio")]
         public string Bio { get; set; }
 
         [Required]
@@ -31,8 +31,8 @@ namespace ANightsTaleUI.Models
         [Display(Name = "Class")]
         public int ClassID { get; set; }
 
-
-		public int Experience { get; set; }
+        public List<int> MySkills { get; set; }
+        public int Experience { get; set; }
 		public int Level { get; set; }
 		public int Str { get; set; }
 		public int Dex { get; set; }

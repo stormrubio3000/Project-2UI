@@ -1,36 +1,18 @@
 ﻿@model ANightsTaleUI.Models.ViewModels.CreateCharacterViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create2";
 }
 
-<h1>Character Creator</h1>
-
-<h4></h4>
+<h1>Choose your skills:</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create2">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Character.Name" class="control-label"></label>
-                <input asp-for="Character.Name" class="form-control" />
-                <span asp-validation-for="Character.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Character.Bio" class="control-label"></label>
-                <input asp-for="Character.Bio" class="form-control" />
-                <span asp-validation-for="Character.Bio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Races.First().Name" class="control-label"></label>
-                <select asp-for="Character.RaceID"
-                        asp-items="@(new SelectList(Model.Races, "RaceID", "Name"))" class="form-control"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Classes.First().Name" class="control-label"></label>
-                <select asp-for="Character.ClassID"
-                        asp-items="@(new SelectList(Model.Classes, "ClassID", "Name"))" class="form-control"></select>
+                <select asp-for="Character.MySkills"
+                        asp-items="@(new MultiSelectList(Model.Skills, "Id", "Name"))" class="form-control"></select>
             </div>
             <div class="form-group">
                 <input asp-for="Character.Name" type="hidden" value=@Model.Character.Name class="form-control" />
@@ -45,6 +27,10 @@
                 <span asp-validation-for="Character.RaceID" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <input asp-for="Character.ClassID" type="hidden" value=@Model.Character.ClassID class="form-control" />
+                <span asp-validation-for="Character.ClassID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input asp-for="Character.CampaignID" type="hidden" value=@Model.Character.CampaignID class="form-control" />
                 <span asp-validation-for="Character.CampaignID" class="text-danger"></span>
             </div>
@@ -53,26 +39,19 @@
                 <span asp-validation-for="Character.RaceID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input asp-for="Character.ClassID" type="hidden" value=@Model.Character.ClassID class="form-control" />
-                <span asp-validation-for="Character.ClassID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input asp-for="Races" type="hidden" value=@Model.Races class="form-control" />
-                <span asp-validation-for="Races" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <input asp-for="Classes" type="hidden" value=@Model.Classes class="form-control" />
                 <span asp-validation-for="Classes" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <input asp-for="Character.MySkills" type="hidden" value=@Model.Character.MySkills class="form-control" />
+                <span asp-validation-for="Character.MySkills" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Next" class="btn btn-primary" />
             </div>
+            @Html.ActionLink("Back", "Create")
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="CharCampUsr">Exit Character Creator</a>
 </div>
 
 @section Scripts {

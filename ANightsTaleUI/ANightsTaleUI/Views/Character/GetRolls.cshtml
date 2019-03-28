@@ -1,22 +1,17 @@
 ﻿@model ANightsTaleUI.Models.ViewModels.CreateCharacterViewModel
 
 @{
-    ViewData["Title"] = "Create2Get";
+    ViewData["Title"] = "GetRolls";
 }
 
-<h1>Create2</h1>
+<h1>GetRolls</h1>
 
-<h4>Character</h4>
+<h4>CreateCharacterViewModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create2Get">
+        <form asp-action="GetRolls">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Skills.First().Name" class="control-label"></label>
-                <select asp-for="MySkills"
-                        asp-items="@(new MultiSelectList(Model.Skills, "Id", "Name"))" class="form-control"></select>
-            </div>
             <div class="form-group">
                 <input asp-for="Character.Name" type="hidden" value=@Model.Character.Name class="form-control" />
                 <span asp-validation-for="Character.Name" class="text-danger"></span>
@@ -45,12 +40,19 @@
                 <input asp-for="Classes" type="hidden" value=@Model.Classes class="form-control" />
                 <span asp-validation-for="Classes" class="text-danger"></span>
             </div>
-            @Html.ActionLink("Back", "Create")
             <div class="form-group">
-                <input type="submit" value="Next" class="btn btn-primary" />
+                <input asp-for="Character.MySkills" type="hidden" value=@Model.Character.MySkills class="form-control" />
+                <span asp-validation-for="Character.MySkills" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
