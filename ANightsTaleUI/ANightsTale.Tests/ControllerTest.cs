@@ -1,8 +1,10 @@
 ﻿using ANightsTaleUI.Controllers;
 using ANightsTaleUI.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace ANightsTale.Tests
@@ -19,6 +21,20 @@ namespace ANightsTale.Tests
 				var con = new ConfigurationBuilder();
 				var config = con.Build();
 				var cont = new CharacterController(http, config);
+				Task<ActionResult> result = cont.Index();
+				result = cont.CampaignList(1);
+				result = cont.CharCampUsr(1, "Illputsomething");
+				result = cont.Details(1);
+				result = cont.Create();
+				var chara = new Character()
+				{
+					Name = "This is a test",
+					RaceID = 1,
+					ClassID = 1
+				};
+				result = cont.Create2(chara);
+				result = cont.GetInventory(1);
+				result = cont.CreateInventory(1);
 				Assert.True(true);
 			}
 			catch
