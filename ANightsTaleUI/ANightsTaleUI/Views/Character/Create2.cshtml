@@ -4,23 +4,53 @@
     ViewData["Title"] = "Create2";
 }
 
+@{
+    var classId = Model.Character.ClassID;
+    var raceId = Model.Character.RaceID;
+    var name = Model.Character.Name;
+    var bio = Model.Character.Bio;
+    var className = Model.Classes.Find(r => r.ClassID == classId).Name;
+    var raceName = Model.Races.Find(r => r.RaceID == raceId).Name;
+}
+
 <header>
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=IM+Fell+DW+Pica+SC" />
 
 </header>
 
 <style>
-body { background-image: url("https://stmed.net/sites/default/files/fantasy-forest-wallpapers-28145-395062.jpg"); background-repeat: no-repeat }
+    body {
+        background-image: url("https://stmed.net/sites/default/files/fantasy-forest-wallpapers-28145-395062.jpg");
+        background-repeat: no-repeat
+    }
 
+    .item {
+        float: right;
+        height : 400px;
+        margin-left : 200px
+    }
 
     h1, p {
         font-family: "IM Fell DW Pica SC";
         color: gold;
     }
 
-     .back {
+    .back {
         font-family: "IM Fell DW Pica SC";
         color: darkgoldenrod;
+    }
+
+    .tag {
+        font-family: "IM Fell DW Pica SC";
+        color: darkgoldenrod;
+        font-size : 20px;
+    }
+
+    .data {
+        font-family: "IM Fell DW Pica SC";
+        color: darkgoldenrod;
+        font-size: 20px;
+        font-weight : bold;
     }
 
     .row {
@@ -28,12 +58,12 @@ body { background-image: url("https://stmed.net/sites/default/files/fantasy-fore
         margin: 0 auto;
         background-color: lightgray;
         border-style: double;
-        border-color: goldenrod
+        border-color: goldenrod;
     }
 
     .form-group, .control-label .form-control, .col-md-4 {
         font-family: "IM Fell DW Pica SC";
-        margin-top : 10px
+        margin-top: 10px
     }
 
     .btn-btn-primary {
@@ -92,6 +122,64 @@ body { background-image: url("https://stmed.net/sites/default/files/fantasy-fore
             <a asp-action="Create" class="back">Back</a>
             @Html.ActionLink("Make Attribute Rolls", "localhost:4200")
         </form>
+
+
+    </div>
+    <div class="tag">
+        @Html.DisplayNameFor(model => model.Character.Name)
+        <label class="data">: @name </label>
+        <br />
+        @Html.DisplayNameFor(model => model.Character.Bio)
+        <label class="data">: @bio </label>
+        <br />
+        @Html.DisplayNameFor(model => model.Character.Class)
+        <label class="data">: @className </label>
+        <br />
+        @Html.DisplayNameFor(model => model.Character.Race)
+        <label class="data">: @raceName </label>
+        <br />
+    </div>
+    <div>
+        @if (classId == 1)
+        {
+            <img src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/342/420/618/636272680339895080.png" class="item">
+        }
+        else if (classId == 2)
+        {
+            <img src="https://vignette.wikia.nocookie.net/villains/images/6/6b/Radi_Jaeger.png/revision/latest?cb=20130928132640" class="item">
+        }
+        else if (classId == 3)
+        {
+            <img src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/365/420/618/636272701937419552.png" class="item">
+        }
+        else if (classId == 4)
+        {
+            <img src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/369/420/618/636272705936709430.png" class="item">
+        }
+        else if (classId == 5)
+        {
+            <img src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/485/420/618/636274643818663058.png" class="item">
+        }
+        else if (classId == 6)
+        {
+            <img src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/371/420/618/636272706155064423.png" class="item">
+        }
+        else if (classId == 7)
+        {
+            <img src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/346/420/618/636272691461725405.png" class="item">
+        }
+        else if (classId == 8)
+        {
+            <img src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/367/420/618/636272702826438096.png" class="item">
+        }
+        else if (classId == 9)
+        {
+            <img src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/384/420/618/636272820319276620.png" class="item">
+        }
+        else if (classId == 10)
+        {
+            <img src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/357/420/618/636272696881281556.png" class="item">
+        }
     </div>
 </div>
 
