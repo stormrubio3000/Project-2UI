@@ -4,6 +4,46 @@
     ViewData["Title"] = "Create2";
 }
 
+<header>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=IM+Fell+DW+Pica+SC" />
+
+</header>
+
+<style>
+body { background-image: url("https://stmed.net/sites/default/files/fantasy-forest-wallpapers-28145-395062.jpg"); background-repeat: no-repeat }
+
+
+    h1, p {
+        font-family: "IM Fell DW Pica SC";
+        color: gold;
+    }
+
+     .back {
+        font-family: "IM Fell DW Pica SC";
+        color: darkgoldenrod;
+    }
+
+    .row {
+        float: none;
+        margin: 0 auto;
+        background-color: lightgray;
+        border-style: double;
+        border-color: goldenrod
+    }
+
+    .form-group, .control-label .form-control, .col-md-4 {
+        font-family: "IM Fell DW Pica SC";
+        margin-top : 10px
+    }
+
+    .btn-btn-primary {
+        background-color: forestgreen;
+        font-family: "IM Fell DW Pica SC";
+        margin-bottom: 10px;
+        margin-top: 10px
+    }
+</style>
+
 <h1>Choose your skills:</h1>
 <hr />
 <div class="row">
@@ -47,10 +87,10 @@
                 <span asp-validation-for="Character.MySkills" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Next" class="btn btn-primary" />
+                <input type="submit" value="Next" class="btn-btn-primary" />
             </div>
+            <a asp-action="Create" class="back">Back</a>
             @Html.ActionLink("Make Attribute Rolls", "localhost:4200")
-            @Html.ActionLink("Back", "Create")
         </form>
     </div>
 </div>
