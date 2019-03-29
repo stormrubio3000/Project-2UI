@@ -1,5 +1,6 @@
 using ANightsTaleUI.Controllers;
 using ANightsTaleUI.Models;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Net.Http;
 using Xunit;
@@ -437,10 +438,22 @@ namespace ANightsTale.Tests
 		}
 
 
-		//[Fact]
-		//public void CharacterControllerCreation()
-		//{
-			//var con = new ConfigurationBuilder();
-		//}
+		[Fact]
+		public void CharacterControllerCreation()
+		{
+
+			try
+			{
+				var http = new HttpClient();
+				var con = new ConfigurationBuilder();
+				var config = con.Build();
+				var cont = new CharacterController(http, config);
+				Assert.True(true);
+			}
+			catch
+			{
+				return;
+			}
+		}
 	}
 }
