@@ -10,8 +10,11 @@ namespace ANightsTaleUI.Models
     {
         public int RaceID { get; set; }
 
+		[Required]
         [Display(Name = "Race")]
         public string Name { get; set; }
+
+		[Required]
         public string Description { get; set; }
     }
 }

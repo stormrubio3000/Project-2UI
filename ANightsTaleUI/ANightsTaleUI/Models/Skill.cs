@@ -10,6 +10,7 @@ namespace ANightsTaleUI.Models
     {
         public int Id { get; set; }
 
+		[Required]
         [Display(Name="Choose from available skills:")]
         public string Name { get; set; }
     }
