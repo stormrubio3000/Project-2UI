@@ -1,5 +1,6 @@
 using ANightsTaleUI.Controllers;
 using ANightsTaleUI.Models;
+using ANightsTaleUI.Models.ViewModels;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -548,5 +549,92 @@ namespace ANightsTale.Tests
 				Assert.True(true);
 			}
 		}
+
+
+
+		[Fact]
+		public void AbilityCharPass()
+		{
+			var abilchar = new AbilityChar()
+			{
+				charID = 1,
+				mod = 1,
+				ability = new Abilities()
+			};
+
+			Assert.Equal(1, abilchar.charID);
+			Assert.Equal(1, abilchar.mod);
+			Assert.NotNull(abilchar.ability);
+		}
+
+
+		[Fact]
+		public void AbilityPassPass()
+		{
+			var abilpass = new Abilitypass()
+			{
+				charID = 1
+			};
+			Assert.Equal(1, abilpass.charID);
+		}
+
+		[Fact]
+		public void FeatPassPass()
+		{
+			var featpass = new Featpass()
+			{
+				charID = 1,
+				featId = 1,
+				feat = new Feats()
+			};
+			Assert.Equal(1, featpass.featId);
+			Assert.Equal(1, featpass.charID);
+			Assert.NotNull(featpass.feat);
+		}
+
+
+		[Fact]
+		public void CCVMPass()
+		{
+			var CCVM = new CreateCharacterViewModel()
+			{
+				Character = new Character()
+			};
+			Assert.NotNull(CCVM.Character);
+		}
+
+		[Fact]
+		public void InvPassPass()
+		{
+			var invpass = new Inventorypass()
+			{
+				charID = 1
+			};
+			Assert.Equal(1, invpass.charID);
+		}
+
+
+
+		[Fact]
+		public void ItemInvPass()
+		{
+			var iteminv = new ItemInv()
+			{
+				charID = 1,
+				itemid = 1,
+				quantity = 1,
+				toggle = true,
+				inventory = new Inventory(),
+				item = new Item()
+			};
+			Assert.Equal(1, iteminv.itemid);
+			Assert.Equal(1, iteminv.charID);
+			Assert.Equal(1, iteminv.quantity);
+			Assert.True(iteminv.toggle);
+			Assert.NotNull(iteminv.inventory);
+			Assert.NotNull(iteminv.item);
+		}
+
+
 	}
 }
