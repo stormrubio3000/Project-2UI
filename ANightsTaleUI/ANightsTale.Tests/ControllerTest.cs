@@ -22,10 +22,15 @@ namespace ANightsTale.Tests
 				var config = con.Build();
 				var cont = new CharacterController(http, config);
 				Task<ActionResult> result = cont.Index();
+				Assert.NotNull(result);
 				result = cont.CampaignList(1);
+				Assert.NotNull(result);
 				result = cont.CharCampUsr(1, "Illputsomething");
+				Assert.NotNull(result);
 				result = cont.Details(1);
+				Assert.NotNull(result);
 				result = cont.Create();
+				Assert.NotNull(result);
 				var chara = new Character()
 				{
 					Name = "This is a test",
@@ -33,9 +38,11 @@ namespace ANightsTale.Tests
 					ClassID = 1
 				};
 				result = cont.Create2(chara);
+				Assert.NotNull(result);
 				result = cont.GetInventory(1);
+				Assert.NotNull(result);
 				result = cont.CreateInventory(1);
-				Assert.True(true);
+				Assert.NotNull(result);
 			}
 			catch
 			{
