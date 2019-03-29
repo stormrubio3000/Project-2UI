@@ -7,8 +7,6 @@ using Xunit;
 
 namespace ANightsTale.Tests
 {
-
-
 	public class ModelsTest
 	{
 		[Fact]
@@ -434,25 +432,6 @@ namespace ANightsTale.Tests
 			catch
 			{
 				Assert.True(true);
-			}
-		}
-
-
-		[Fact]
-		public void CharacterControllerCreation()
-		{
-
-			try
-			{
-				var http = new HttpClient();
-				var con = new ConfigurationBuilder();
-				var config = con.Build();
-				var cont = new CharacterController(http, config);
-				Assert.True(true);
-			}
-			catch
-			{
-				return;
 			}
 		}
 	}
