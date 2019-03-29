@@ -1,12 +1,13 @@
 using ANightsTaleUI.Controllers;
 using ANightsTaleUI.Models;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Net.Http;
 using Xunit;
 
 namespace ANightsTale.Tests
 {
+
+
 	public class ModelsTest
 	{
 		[Fact]
@@ -434,5 +435,12 @@ namespace ANightsTale.Tests
 				Assert.True(true);
 			}
 		}
+
+
+		//[Fact]
+		//public void CharacterControllerCreation()
+		//{
+			//var con = new ConfigurationBuilder();
+		//}
 	}
 }
