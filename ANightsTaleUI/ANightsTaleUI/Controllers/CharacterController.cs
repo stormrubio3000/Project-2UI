@@ -223,14 +223,18 @@ namespace ANightsTaleUI.Controllers
 
             using (var httpClient = new HttpClient())
             {
-                var Response = await httpClient.GetAsync(url + "/Class/" + character.ClassID.ToString());
-                var Response1 = await httpClient.GetAsync(urlClass);
-                var Response2 = await httpClient.GetAsync(urlRace);
-                if (Response.IsSuccessStatusCode && Response1.IsSuccessStatusCode)
                 HttpRequestMessage request = CreateRequestToService(HttpMethod.Get,
                         Configuration["ServiceEndpoints:AccountCharacter"] + "/Class/" + character.ClassID.ToString());
+                HttpRequestMessage request2 = CreateRequestToService(HttpMethod.Get,
+                        Configuration["ServiceEndpoints:AccountClass"]);
+                HttpRequestMessage request3 = CreateRequestToService(HttpMethod.Get,
+                        Configuration["ServiceEndpoints:AccountRace"]);
 
                 var Response = await httpClient.SendAsync(request);
+                var Response1 = await httpClient.SendAsync(request2);
+                var Response2 = await httpClient.SendAsync(request3);
+                if (Response.IsSuccessStatusCode && Response1.IsSuccessStatusCode)
+
                 if (Response.IsSuccessStatusCode)
                 {
                     var jsonString = await Response.Content.ReadAsStringAsync();
