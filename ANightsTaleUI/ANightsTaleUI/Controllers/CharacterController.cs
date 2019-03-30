@@ -203,6 +203,7 @@ namespace ANightsTaleUI.Controllers
         {
             try
             {
+                TempData["classId"] = charModel.Character.ClassID;
                 return RedirectToAction(nameof(Create2), "Character", charModel.Character);
             }
             catch
@@ -217,9 +218,15 @@ namespace ANightsTaleUI.Controllers
             var charModel = new CreateCharacterViewModel();
             charModel.Character = character;
             charModel.Skills = new List<Skill>();
+            charModel.Classes = new List<Class>();
+            charModel.Races = new List<Race>();
 
             using (var httpClient = new HttpClient())
             {
+                var Response = await httpClient.GetAsync(url + "/Class/" + character.ClassID.ToString());
+                var Response1 = await httpClient.GetAsync(urlClass);
+                var Response2 = await httpClient.GetAsync(urlRace);
+                if (Response.IsSuccessStatusCode && Response1.IsSuccessStatusCode)
                 HttpRequestMessage request = CreateRequestToService(HttpMethod.Get,
                         Configuration["ServiceEndpoints:AccountCharacter"] + "/Class/" + character.ClassID.ToString());
 
@@ -227,7 +234,11 @@ namespace ANightsTaleUI.Controllers
                 if (Response.IsSuccessStatusCode)
                 {
                     var jsonString = await Response.Content.ReadAsStringAsync();
+                    var jsonString1 = await Response1.Content.ReadAsStringAsync();
+                    var jsonString2 = await Response2.Content.ReadAsStringAsync();
                     charModel.Skills = JsonConvert.DeserializeObject<List<Skill>>(jsonString);
+                    charModel.Classes = JsonConvert.DeserializeObject<List<Class>>(jsonString1);
+                    charModel.Races = JsonConvert.DeserializeObject<List<Race>>(jsonString2);
                 }
 
 
