@@ -20,9 +20,6 @@ namespace ANightsTaleUI.Controllers
         {
         }
 
-        static string url = "https://localhost:44369/api/Character";
-        static string urlRace = "https://localhost:44369/api/Race";
-        static string urlClass = "https://localhost:44369/api/Class";
         // GET: Character
         public async Task<ActionResult> Index()
         {
@@ -34,7 +31,10 @@ namespace ANightsTaleUI.Controllers
             var models = new List<Character>();
 			using (var httpClient = new HttpClient())
 			{
-				var Response = await httpClient.GetAsync(url);
+                HttpRequestMessage request = CreateRequestToService(HttpMethod.Get,
+                            Configuration["ServiceEndpoints:AccountCharacter"]);
+
+                var Response = await httpClient.SendAsync(request);
 				if (Response.IsSuccessStatusCode)
 				{
 					var jsonString = await Response.Content.ReadAsStringAsync();
@@ -149,8 +149,9 @@ namespace ANightsTaleUI.Controllers
 			var model = new Character();
 			using (var httpClient = new HttpClient())
 			{
-
-				var Response = await httpClient.GetAsync(url+"/GetCharacter/" + id.ToString());
+                HttpRequestMessage request = CreateRequestToService(HttpMethod.Get,
+                        Configuration["ServiceEndpoints:AccountCharacter"] + "/GetCharacter/" + id.ToString());
+                var Response = await httpClient.SendAsync(request);
 				if (Response.IsSuccessStatusCode)
 				{
 					var jsonString = await Response.Content.ReadAsStringAsync();
@@ -171,14 +172,20 @@ namespace ANightsTaleUI.Controllers
 
             using (var httpClient = new HttpClient())
             {
-                var Response = await httpClient.GetAsync(urlRace);
+                HttpRequestMessage request = CreateRequestToService(HttpMethod.Get,
+                        Configuration["ServiceEndpoints:AccountRace"]);
+
+                var Response = await httpClient.SendAsync(request);
                 if (Response.IsSuccessStatusCode)
                 {
                     var jsonString = await Response.Content.ReadAsStringAsync();
                     model.Races = JsonConvert.DeserializeObject<List<Race>>(jsonString);
                 }
 
-                var Response2 = await httpClient.GetAsync(urlClass);
+                HttpRequestMessage request2 = CreateRequestToService(HttpMethod.Get,
+                            Configuration["ServiceEndpoints:AccountClass"]);
+
+                var Response2 = await httpClient.SendAsync(request2);
                 if (Response.IsSuccessStatusCode)
                 {
                     var jsonString = await Response2.Content.ReadAsStringAsync();
@@ -213,7 +220,10 @@ namespace ANightsTaleUI.Controllers
 
             using (var httpClient = new HttpClient())
             {
-                var Response = await httpClient.GetAsync(url + "/Class/" + character.ClassID.ToString());
+                HttpRequestMessage request = CreateRequestToService(HttpMethod.Get,
+                        Configuration["ServiceEndpoints:AccountCharacter"] + "/Class/" + character.ClassID.ToString());
+
+                var Response = await httpClient.SendAsync(request);
                 if (Response.IsSuccessStatusCode)
                 {
                     var jsonString = await Response.Content.ReadAsStringAsync();
@@ -252,7 +262,10 @@ namespace ANightsTaleUI.Controllers
 			var models = new Inventorypass();
 			using (var httpClient = new HttpClient())
 			{
-				var Response = await httpClient.GetAsync(url+ "/Inventory/" + id.ToString());
+                HttpRequestMessage request = CreateRequestToService(HttpMethod.Get,
+                        Configuration["ServiceEndpoints:AccountCharacter"] + "/Inventory/" + id.ToString());
+
+                var Response = await httpClient.SendAsync(request);
 				if (Response.IsSuccessStatusCode)
 				{
 					var jsonString = await Response.Content.ReadAsStringAsync();
@@ -270,7 +283,10 @@ namespace ANightsTaleUI.Controllers
 			var models = new ItemInv();
 			using (var httpClient = new HttpClient())
 			{
-				var Response = await httpClient.GetAsync("https://localhost:44369/api/Item");
+                HttpRequestMessage request = CreateRequestToService(HttpMethod.Get,
+                        Configuration["ServiceEndpoints:AccountItem"]);
+
+                var Response = await httpClient.SendAsync(request);
 				if (Response.IsSuccessStatusCode)
 				{
 					var jsonString = await Response.Content.ReadAsStringAsync();
@@ -293,9 +309,12 @@ namespace ANightsTaleUI.Controllers
 				ItemID = selection.item.ItemID, Quantity = selection.quantity, ToggleE = false };
 			try
 			{
-				using (var httpClient = new HttpClient())
+                HttpRequestMessage request = CreateRequestToService(HttpMethod.Get,
+                        Configuration["ServiceEndpoints:AccountCharacter"]);
+
+                using (var httpClient = new HttpClient())
 				{
-					var request = CreateRequestToService(HttpMethod.Post, url + "/Inventory" , collection);
+					var request2 = CreateRequestToService(HttpMethod.Post, request + "/Inventory" , collection);
 					var Response = await httpClient.SendAsync(request);
 				}
 

@@ -48,7 +48,7 @@ body { background-image: url("https://stmed.net/sites/default/files/fantasy-fore
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create2">
+        <form action="localhost:4200" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <select asp-for="Character.MySkills"
@@ -87,10 +87,9 @@ body { background-image: url("https://stmed.net/sites/default/files/fantasy-fore
                 <span asp-validation-for="Character.MySkills" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Next" class="btn-btn-primary" />
+                <input type="submit" value="Next" class="register" />
             </div>
             <a asp-action="Create" class="back">Back</a>
-            @Html.ActionLink("Make Attribute Rolls", "localhost:4200")
         </form>
     </div>
 </div>
