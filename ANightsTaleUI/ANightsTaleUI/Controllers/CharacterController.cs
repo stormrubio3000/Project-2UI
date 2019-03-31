@@ -241,7 +241,8 @@ namespace ANightsTaleUI.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(GetRolls), "Character", charModel.Character);
+                return Redirect("http://localhost:4200/rolls");
+                //return RedirectToAction(nameof(GetRolls), "Character", charModel.Character);
             }
             catch
             {
