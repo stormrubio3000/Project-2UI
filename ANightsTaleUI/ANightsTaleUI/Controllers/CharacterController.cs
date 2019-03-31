@@ -272,7 +272,7 @@ namespace ANightsTaleUI.Controllers
                     //    charModel.Character = JsonConvert.DeserializeObject<Character>(jsonString);
                     //}
                 }
-                return RedirectToAction(nameof(GetRolls), "Character", charModel.Character);
+                return Redirect("http://localhost:4200/rolls");
             }
             catch
             {
