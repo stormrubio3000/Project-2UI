@@ -26,7 +26,7 @@ namespace ANightsTaleUI.Controllers
 			using (var httpClient = new HttpClient())
 			{
 				HttpRequestMessage request = CreateRequestToService(HttpMethod.Get,
-				$"{Configuration["ServiceEndpoints:Users"]}/{id}");
+				$"{Configuration["ServiceEndpoints:CharFeats"]}/{id}");
 				var Response = await httpClient.SendAsync(request);
 				if (Response.IsSuccessStatusCode)
 				{

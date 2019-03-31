@@ -58,7 +58,7 @@ namespace ANightsTaleUI.Controllers
 			using (var httpClient = new HttpClient())
 			{
 				HttpRequestMessage request = CreateRequestToService(HttpMethod.Get,
-				$"{Configuration["ServiceEndpoints:Users"]}/{id}");
+				$"{Configuration["ServiceEndpoints:Item"]}/{id}");
 				var Response = await httpClient.SendAsync(request);
 				if (Response.IsSuccessStatusCode)
 				{
@@ -86,7 +86,7 @@ namespace ANightsTaleUI.Controllers
             {
 				using (var httpClient = new HttpClient())
 				{
-					var request = CreateRequestToService(HttpMethod.Post, $"{Configuration["ServiceEndpoints:Users"]}", collection);
+					var request = CreateRequestToService(HttpMethod.Post, $"{Configuration["ServiceEndpoints:Item"]}", collection);
 					var Response = await httpClient.SendAsync(request);
 				}
 
