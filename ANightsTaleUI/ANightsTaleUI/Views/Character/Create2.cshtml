@@ -78,7 +78,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form action="localhost:4200" method="post">
+        <form asp-action="Create2">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <select asp-for="Character.MySkills"
@@ -87,6 +87,10 @@
             <div class="form-group">
                 <input asp-for="Character.Name" type="hidden" value=@Model.Character.Name class="form-control" />
                 <span asp-validation-for="Character.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Character.Username" type="hidden" value=@Model.Character.Username class="form-control" />
+                <span asp-validation-for="Character.Username" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input asp-for="Character.Bio" type="hidden" value=@Model.Character.Bio class="form-control" />

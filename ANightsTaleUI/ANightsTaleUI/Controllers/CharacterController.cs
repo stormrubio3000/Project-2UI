@@ -80,6 +80,7 @@ namespace ANightsTaleUI.Controllers
         public async Task<ActionResult> CharCampUsr(int id, string username)
         {
             TempData["campaignId"] = id;
+            TempData["username"] = username;
 
             HttpRequestMessage request1 = CreateRequestToService(HttpMethod.Get,
                 Configuration["ServiceEndpoints:AccountCharacter"] + "/" + "CharCampUsr" + "/" + id + "?username=" + username);
@@ -169,6 +170,7 @@ namespace ANightsTaleUI.Controllers
             var model = new CreateCharacterViewModel();
             model.Character = new Character();
             model.Character.CampaignID = (int)TempData.Peek("campaignId");
+            model.Character.Username = (string)TempData.Peek("username");
 
             using (var httpClient = new HttpClient())
             {
@@ -253,10 +255,23 @@ namespace ANightsTaleUI.Controllers
         // POST: Character/Create2
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create2(CreateCharacterViewModel charModel)
+        public async Task<ActionResult> Create2(CreateCharacterViewModel charModel)
         {
             try
             {
+                using (var httpClient = new HttpClient())
+                {
+                    HttpRequestMessage request = CreateRequestToService(HttpMethod.Post,
+                        Configuration["ServiceEndpoints:AccountCharacter"] + "/Buffer", charModel.Character);
+
+                    var Response = await httpClient.SendAsync(request);
+
+                    //if (Response.IsSuccessStatusCode)
+                    //{
+                    //    var jsonString = await Response.Content.ReadAsStringAsync();
+                    //    charModel.Character = JsonConvert.DeserializeObject<Character>(jsonString);
+                    //}
+                }
                 return RedirectToAction(nameof(GetRolls), "Character", charModel.Character);
             }
             catch
@@ -330,7 +345,7 @@ namespace ANightsTaleUI.Controllers
                 using (var httpClient = new HttpClient())
 				{
 					var request2 = CreateRequestToService(HttpMethod.Post, request + "/Inventory" , collection);
-					var Response = await httpClient.SendAsync(request);
+					var Response = await httpClient.SendAsync(request2);
 				}
 
 				return RedirectToAction(nameof(GetInventory),new { id = selection.charID });

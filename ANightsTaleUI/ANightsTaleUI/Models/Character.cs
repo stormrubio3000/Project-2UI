@@ -13,6 +13,7 @@ namespace ANightsTaleUI.Models
 		public int UserId { get; set; }
         public int CampaignID { get; set; }
         public string CampaignName { get; set; }
+        public string Username { get; set; }
         public string Race { get; set; }
         public string Class { get; set; }
 
