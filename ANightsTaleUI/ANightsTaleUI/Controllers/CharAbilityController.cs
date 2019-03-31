@@ -18,14 +18,16 @@ namespace ANightsTaleUI.Controllers
 : base(httpClient, configuration)
 		{
 		}
-		static string url = "https://localhost:44369/api/CharAbility";
+		
 		// GET: CharAbility/Details/5
 		public async Task<ActionResult> GetAbilities(int id)
         {
 			var models = new Abilitypass();
 			using (var httpClient = new HttpClient())
 			{
-				var Response = await httpClient.GetAsync(url + "/" + id.ToString());
+				HttpRequestMessage request = CreateRequestToService(HttpMethod.Get,
+				$"{Configuration["ServiceEndpoints:CharAbility"]}/{id}");
+				var Response = await httpClient.SendAsync(request);
 				if (Response.IsSuccessStatusCode)
 				{
 					var jsonString = await Response.Content.ReadAsStringAsync();
@@ -44,7 +46,9 @@ namespace ANightsTaleUI.Controllers
 			var models = new AbilityChar();
 			using (var httpClient = new HttpClient())
 			{
-				var Response = await httpClient.GetAsync("https://localhost:44369/api/Ability");
+				HttpRequestMessage request = CreateRequestToService(HttpMethod.Get,
+				$"{Configuration["ServiceEndpoints:Ability"]}");
+				var Response = await httpClient.SendAsync(request);
 				if (Response.IsSuccessStatusCode)
 				{
 					var jsonString = await Response.Content.ReadAsStringAsync();
@@ -73,7 +77,8 @@ namespace ANightsTaleUI.Controllers
 			{
 				using (var httpClient = new HttpClient())
 				{
-					var request = CreateRequestToService(HttpMethod.Post, url + "/", collection);
+
+					var request = CreateRequestToService(HttpMethod.Post, $"{Configuration["ServiceEndpoints:CharAbility"]}", collection);
 					var Response = await httpClient.SendAsync(request);
 				}
 
