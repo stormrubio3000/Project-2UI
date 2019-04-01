@@ -147,17 +147,23 @@ namespace ANightsTaleUI.Controllers
         // GET: Character/Details/5
         public async Task<ActionResult> Details(int id)
         {
-			var model = new Character();
+			var model = new CharacterViewModel();
 			using (var httpClient = new HttpClient())
 			{
                 HttpRequestMessage request = CreateRequestToService(HttpMethod.Get,
                         Configuration["ServiceEndpoints:AccountCharacter"] + "/GetCharacter/" + id.ToString());
+                HttpRequestMessage request2 = CreateRequestToService(HttpMethod.Get,
+                        Configuration["ServiceEndpoints:AccountCharacter"] + "/Stats/" + id.ToString());
+
                 var Response = await httpClient.SendAsync(request);
-				if (Response.IsSuccessStatusCode)
+                var Response2 = await httpClient.SendAsync(request2);
+                if (Response.IsSuccessStatusCode && Response2.IsSuccessStatusCode)
 				{
 					var jsonString = await Response.Content.ReadAsStringAsync();
-					Character character = JsonConvert.DeserializeObject<Character>(jsonString);
-					return View(character);
+                    var jsonString2 = await Response2.Content.ReadAsStringAsync();
+                    model.Character = JsonConvert.DeserializeObject<Character>(jsonString);
+                    model.Stats = JsonConvert.DeserializeObject<CharStats>(jsonString2);
+                    return View(model);
 				}
 			}
 
