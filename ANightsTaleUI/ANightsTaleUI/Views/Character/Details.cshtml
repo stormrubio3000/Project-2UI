@@ -15,10 +15,10 @@
         background-repeat: no-repeat
     }
 
-    .item {
+    #img {
         float: right;
-        height: 400px;
-        margin-left: 200px
+        height: 300px;
+        margin-left: 100px
     }
 
     h1, h4, .back {
@@ -43,6 +43,7 @@
     }
 
     table {
+        font-family: "IM Fell DW Pica SC";
         background-color: lightgray;
         border-style: double;
         border-color: goldenrod;
@@ -59,9 +60,16 @@
     #Attributes {
         width: 15%
     }
+    #Saves {
+        width: 10%
+    }
 
     #links {
         width: 32%
+    }
+
+    #OtherInfo {
+        width: 25%
     }
 
     th {
@@ -157,7 +165,7 @@
 <div id="OtherInfo" style="display: inline-block">
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Character.MaxHP)
+            HP
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Character.MaxHP) (@Html.DisplayFor(model => model.Stats.HP))
@@ -187,49 +195,92 @@
             @Html.DisplayFor(model => model.Stats.Gold)
         </dd>
     </dl>
+</div>
 
-    <div>
-        @if (classId.Equals("Barbarian"))
-        {
-            <img src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/342/420/618/636272680339895080.png" class="item">
-        }
-        else if (classId.Equals("Fighter"))
-        {
-            <img src="https://vignette.wikia.nocookie.net/villains/images/6/6b/Radi_Jaeger.png/revision/latest?cb=20130928132640" class="item">
-        }
-        else if (classId.Equals("Paladin"))
-        {
-            <img src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/365/420/618/636272701937419552.png" class="item">
-        }
-        else if (classId.Equals("Bard"))
-        {
-            <img src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/369/420/618/636272705936709430.png" class="item">
-        }
-        else if (classId.Equals("Sorcerer"))
-        {
-            <img src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/485/420/618/636274643818663058.png" class="item">
-        }
-        else if (classId.Equals("Cleric"))
-        {
-            <img src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/371/420/618/636272706155064423.png" class="item">
-        }
-        else if (classId.Equals("Druid"))
-        {
-            <img src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/346/420/618/636272691461725405.png" class="item">
-        }
-        else if (classId.Equals("Ranger"))
-        {
-            <img src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/367/420/618/636272702826438096.png" class="item">
-        }
-        else if (classId.Equals("Rogue"))
-        {
-            <img src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/384/420/618/636272820319276620.png" class="item">
-        }
-        else if (classId.Equals("Wizard"))
-        {
-            <img src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/357/420/618/636272696881281556.png" class="item">
-        }
-    </div>
+<div id="Saves" style="display: inline-block">
+    <h4>Saves</h4>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Character.Str)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stats.STR_Save)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Character.Dex)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stats.DEX_Save)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Character.Con)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stats.CON_Save)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Character.Int)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stats.INT_Save)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Character.Wis)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stats.WIS_Save)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Character.Cha)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stats.CHA_Save)
+        </dd>
+    </dl>
+    <hr />
+</div>
+
+<div id="img" style="float:right">
+    @if (classId.Equals("Barbarian"))
+    {
+        <img src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/342/420/618/636272680339895080.png" class="item">
+    }
+    else if (classId.Equals("Fighter"))
+    {
+        <img src="https://vignette.wikia.nocookie.net/villains/images/6/6b/Radi_Jaeger.png/revision/latest?cb=20130928132640" class="item">
+    }
+    else if (classId.Equals("Paladin"))
+    {
+        <img src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/365/420/618/636272701937419552.png" class="item">
+    }
+    else if (classId.Equals("Bard"))
+    {
+        <img src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/369/420/618/636272705936709430.png" class="item">
+    }
+    else if (classId.Equals("Sorcerer"))
+    {
+        <img src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/485/420/618/636274643818663058.png" class="item">
+    }
+    else if (classId.Equals("Cleric"))
+    {
+        <img src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/371/420/618/636272706155064423.png" class="item">
+    }
+    else if (classId.Equals("Druid"))
+    {
+        <img src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/346/420/618/636272691461725405.png" class="item">
+    }
+    else if (classId.Equals("Ranger"))
+    {
+        <img src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/367/420/618/636272702826438096.png" class="item">
+    }
+    else if (classId.Equals("Rogue"))
+    {
+        <img src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/384/420/618/636272820319276620.png" class="item">
+    }
+    else if (classId.Equals("Wizard"))
+    {
+        <img src="https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/357/420/618/636272696881281556.png" class="item">
+    }
 </div>
 
 <h4>Skills</h4>
@@ -320,11 +371,11 @@
 </table>
 
 <div class="row" id="links">
-     <dl>
-         <dd class="data-name">
-             @Html.ActionLink("Inventory", "GetInventory", new { id = Model.Character.CharacterID }, new { @class = "links" })
-             @Html.ActionLink("Abilities", "GetAbilities", "CharAbility", new { id = Model.Character.CharacterID }, new { @class = "links" })
-             @Html.ActionLink("Feats", "Details", "CharFeats", new { id = Model.Character.CharacterID }, new { @class = "links" })
-         </dd>
+    <dl>
+        <dd class="data-name">
+            @Html.ActionLink("Inventory", "GetInventory", new { id = Model.Character.CharacterID }, new { @class = "links" })
+            @Html.ActionLink("Abilities", "GetAbilities", "CharAbility", new { id = Model.Character.CharacterID }, new { @class = "links" })
+            @Html.ActionLink("Feats", "Details", "CharFeats", new { id = Model.Character.CharacterID }, new { @class = "links" })
+        </dd>
     </dl>
 </div>
