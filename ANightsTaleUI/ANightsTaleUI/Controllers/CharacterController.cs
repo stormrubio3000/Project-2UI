@@ -345,12 +345,10 @@ namespace ANightsTaleUI.Controllers
 				ItemID = selection.item.ItemID, Quantity = selection.quantity, ToggleE = false };
 			try
 			{
-                HttpRequestMessage request = CreateRequestToService(HttpMethod.Get,
-                        Configuration["ServiceEndpoints:AccountCharacter"]);
 
                 using (var httpClient = new HttpClient())
 				{
-					var request2 = CreateRequestToService(HttpMethod.Post, request + "/Inventory" , collection);
+					var request2 = CreateRequestToService(HttpMethod.Post, $"{Configuration["ServiceEndpoints:AccountCharacter"]}/Inventory", collection);
 					var Response = await httpClient.SendAsync(request2);
 				}
 

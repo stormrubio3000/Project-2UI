@@ -19,15 +19,15 @@ namespace ANightsTaleUI.Controllers
 		{
 		}
 
-
-		static string url = "https://localhost:44369/api/CharFeats";
 		// GET: CharFeats/Details/5
 		public async Task<ActionResult> Details(int id)
         {
 			var models = new Featpass();
 			using (var httpClient = new HttpClient())
 			{
-				var Response = await httpClient.GetAsync(url + "/" + id.ToString());
+				HttpRequestMessage request = CreateRequestToService(HttpMethod.Get,
+				$"{Configuration["ServiceEndpoints:CharFeats"]}/{id}");
+				var Response = await httpClient.SendAsync(request);
 				if (Response.IsSuccessStatusCode)
 				{
 					var jsonString = await Response.Content.ReadAsStringAsync();
@@ -46,7 +46,9 @@ namespace ANightsTaleUI.Controllers
 			var models = new Featpass();
 			using (var httpClient = new HttpClient())
 			{
-				var Response = await httpClient.GetAsync("https://localhost:44369/api/Feat");
+				HttpRequestMessage request = CreateRequestToService(HttpMethod.Get,
+				$"{Configuration["ServiceEndpoints:Feat"]}");
+				var Response = await httpClient.SendAsync(request);
 				if (Response.IsSuccessStatusCode)
 				{
 					var jsonString = await Response.Content.ReadAsStringAsync();
@@ -74,7 +76,7 @@ namespace ANightsTaleUI.Controllers
 			{
 				using (var httpClient = new HttpClient())
 				{
-					var request = CreateRequestToService(HttpMethod.Post, url + "/", collection);
+					var request = CreateRequestToService(HttpMethod.Post, $"{Configuration["ServiceEndpoints:CharFeats"]}", collection);
 					var Response = await httpClient.SendAsync(request);
 				}
 

@@ -109,8 +109,9 @@ body { background-image: url("https://www.themeraider.com/wp-content/uploads/201
     </div>
 </div>
 
+
 <div>
-    <a asp-action="CharCampUsr" class="back">Exit Character Creator</a>
+    @Html.ActionLink("Exit Character Creator", "CharCampUsr", new { id = Model.Character.CampaignID,username = Model.Character.Username }, new { @class = "links" })
 </div>
 
 @section Scripts {

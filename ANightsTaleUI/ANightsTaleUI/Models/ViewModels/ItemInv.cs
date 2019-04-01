@@ -23,7 +23,7 @@ namespace ANightsTaleUI.Models.ViewModels
 		[Required]
 		public int itemid { get; set; }
 
-		[Required]
+		
 		public bool toggle { get; set; }
 
 		

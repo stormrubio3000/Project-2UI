@@ -26,14 +26,15 @@ namespace ANightsTaleUI.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        static string url = "https://localhost:44369/api/Item";
 		// GET: Item
 		public async Task<ActionResult> Index(int? page)
         {
 			var models = new List<Item>();
 			using (var httpClient = new HttpClient())
 			{
-				var Response = await httpClient.GetAsync(url);
+				HttpRequestMessage request = CreateRequestToService(HttpMethod.Get,
+				$"{Configuration["ServiceEndpoints:Item"]}");
+				var Response = await httpClient.SendAsync(request);
 				if(Response.IsSuccessStatusCode)
 				{
 					var jsonString = await Response.Content.ReadAsStringAsync();
@@ -56,8 +57,9 @@ namespace ANightsTaleUI.Controllers
 			var model = new Item();
 			using (var httpClient = new HttpClient())
 			{
-
-				var Response = await httpClient.GetAsync(url+"/"+id.ToString());
+				HttpRequestMessage request = CreateRequestToService(HttpMethod.Get,
+				$"{Configuration["ServiceEndpoints:Item"]}/{id}");
+				var Response = await httpClient.SendAsync(request);
 				if (Response.IsSuccessStatusCode)
 				{
 					var jsonString = await Response.Content.ReadAsStringAsync();
@@ -84,7 +86,7 @@ namespace ANightsTaleUI.Controllers
             {
 				using (var httpClient = new HttpClient())
 				{
-					var request = CreateRequestToService(HttpMethod.Post, url, collection);
+					var request = CreateRequestToService(HttpMethod.Post, $"{Configuration["ServiceEndpoints:Item"]}", collection);
 					var Response = await httpClient.SendAsync(request);
 				}
 
